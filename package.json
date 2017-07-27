@@ -1,0 +1,16 @@
+{
+  "name": "retailapp",
+  "version": "1.0.0",
+  "description": "Retail store app made on MEAN stack application",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Saurabh Kinariwala",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "mongojs": "^2.4.0"
+  }
+}

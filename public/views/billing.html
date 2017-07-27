@@ -1,0 +1,103 @@
+<div class="billing-box">
+    <h1 class="invoice">Invoice</h1>
+    <div class="form-group col-sm-6">
+      <h2 class="pull-left">Order No : {{custObj.billNo}}</h2>
+    </div>
+      <div class="form-group col-sm-3 pull-right">
+				<label for="date" class="control-label date-label">Date :</label>
+				<div class="pull-right">
+					<input id="date" name="billDdate" class="form-control datepicker bill-date" ng-model="custObj.billDate" data-date-format="mm/dd/yyyy" >
+          <p ng-show="userDetails.billDdate.$error.required && userDetails.billDdate.$dirty">Order Date is required.</p>
+				</div>
+			</div>
+    <form class="form-inline form-wrapper well col-sm-12" name="userDetails" novalidate>
+          <div class="form-group col-sm-3">
+<!--            <label for="exampleInputName2">Name</label>-->
+            <input type="text" class="form-control" ng-model="custObj.name" name="username" id="exampleInputName2" placeholder="Enter Name" required>
+              <p ng-show="userDetails.username.$error.required && userDetails.username.$dirty">Your username is required.</p>
+          </div>
+          <div class="form-group col-sm-3">
+<!--            <label for="exampleInputEmail2">Email</label>-->
+            <input type="email" class="form-control" ng-model="custObj.email" name="useremail" id="exampleInputEmail2" placeholder="Enter Email">
+              <p ng-show="userDetails.useremail.$error.required && userDetails.useremail.$dirty">Your email is required.</p>
+              <p ng-show="userDetails.useremail.$error.email && userDetails.useremail.$dirty">Enter a valid email</p>
+          </div>
+        <div class="form-group col-sm-3">
+<!--            <label for="address">Address</label>-->
+            <input type="text" class="form-control" ng-model="custObj.address" name="useraddress" id="address" placeholder="Enter Address" required>
+            <p ng-show="userDetails.useraddress.$error.required && userDetails.useraddress.$dirty">Your address is required.</p>
+          </div>
+        <div class="form-group col-sm-3">
+<!--            <label for="contact">Contact No.</label>-->
+            <input type="text" class="form-control" ng-model="custObj.contact" ng-pattern="/^\d{10}$/" id="contact" name="usercontact" placeholder="Mb. No." required>
+            <p ng-show="userDetails.usercontact.$error.required && userDetails.usercontact.$dirty">Your contact is required.</p>
+            <p ng-show="userDetails.usercontact.$invalid && userDetails.usercontact.$dirty">Enter a valid number.</p>
+          </div>
+
+    </form>
+    <ng-form name="itemDetail">
+        <table class="table table-bordered">
+            <thead><td>Category</td><td>Pdt Name</td><td>Avl Qty</td><td>Qty</td><td>Price</td><td>Amt</td></thead>
+            <tbody>
+                <tr>
+                  <td class="col-md-2"><select class="form-control" ng-blur="categoryBlur()" name="selectedCat" placeholder="select" id="Pdt" ng-options="opt for opt in options" ng-model="newProduct.cat"></select>
+                  <p ng-if="itemDetail.selectedCat.$error.required && itemDetail.selectedCat.$dirty">Select the category</p></td>
+
+                  <td class="col-md-2"><input ng-model="newProduct.pName" ng-blur="inputBlur()" item-names="prodName" placeholder="Product Name" name="productName" id="search-product" typeahead="state for state in prodName" class="form-control" required/>
+                  <p ng-if="itemDetail.productName.$error.required && itemDetail.productName.$dirty">Enter the product</p></td>
+
+                  <td class="col-md-2"><input ng-model="newProduct.qty" placeholder=0 class="form-control" id="avlb-qty" readonly/></td>
+
+                  <td class="col-md-2"><input type="number" ng-change="changeQty()" ng-pattern="/[^0]+/" ng-model="newProduct.dmndQty" name="productQty" id="dmnd-qty" min="0" placeholder="Product Qty" class="form-control" required/>
+                  <p ng-if="itemDetail.productQty.$invalid && itemDetail.productQty.$dirty">Enter the product quantity</p></td>
+
+                  <td class="col-md-2"><input ng-model="newProduct.price" placeholder=0 class="form-control" id="pdt-price" readonly/></td>
+
+                  <td class="col-md-2"><input ng-model="newProduct.amount" placeholder=0 class="form-control" id="total-amount" readonly/></td>
+
+                </tr>
+
+                <tr>
+
+                  <td colspan="5"></td>
+                  <td class="col-md-2"><button id="addBtn" ng-hide="editBtn" type="submit" class="btn-primary btn" ng-click="addRow(itemDetail.$valid)">Add</button>
+                  <button id="addBtn" type="submit" ng-show="editBtn" class="btn-primary btn" ng-click="updateRow()">Update</button></td>
+
+              </tr>
+            </tbody>
+        </table>
+    </ng-form>
+
+    <div class="cont">
+      <table class="table table-bordered">
+         <thead>
+             <tr>
+                 <td class="col-sm-1"><span class="bold-font">Sr No</span></td>
+                 <td class="col-sm-4"><span class="bold-font">Product Name</span></td>
+                 <td class="col-sm-2"><span class="bold-font">Qty</span></td>
+                 <td class="col-sm-3"><span class="bold-font">Price</span></td>
+                 <td class="col-sm-2"><span class="bold-font">Amount</span></td>
+                 <td></td>
+                 <td></td>
+             </tr>
+         </thead>
+         <tbody class="billing-body">
+             <tr ng-repeat="product in custObj.prodDetails" class="newRow">
+               <td>{{$index+1}}</td>
+               <td>{{product.pName}}</td>
+               <td>{{product.dmndQty}}</td>
+               <td>{{product.price}}</td>
+               <td>{{product.amount}}</td>
+               <td><span id="dlteBtn" ng-click="deletePdt($index)" class="glyphicon glyphicon-trash"></span></td>
+               <td><span class="glyphicon glyphicon-edit" ng-click="editPdt(product,$index)"></span></td>
+             </tr>
+              <tr>
+                  <td colspan="3"></td>
+                  <td><span class="bold-font">Total</span></td>
+                  <td><span class="bold-font">{{custObj.total}}</span></td>
+                  <td colspan="2"><button type="submit" ng-disabled="(userDetails.$valid && (custObj.prodDetails && custObj.billDate)) ? false : true" ng-click="submitBill()" class="btn-primary btn">Checkout</button></td>
+              </tr>
+         </tbody>
+</table>
+</div>
+</div>

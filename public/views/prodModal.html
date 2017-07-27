@@ -1,0 +1,39 @@
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Add Quantity</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-wrapper well"  name="prodDetails" novalidate>
+					<div class="form-group">
+				    <h1>{{data.id}}</h1>
+				  </div>
+				  <div class="form-group">
+				    <h2>{{data.pName}}</h2>
+				  </div>
+          <div class="form-group clear-fix">
+            <label for="place">Coming From</label>
+            <input type="text" class="form-control" id="place" name="fromPlace" ng-model="myData.fromPlace" required/></select>
+            <p ng-show="prodDetails.fromPlace.$error.required && prodDetails.fromPlace.$dirty">From place is required.</p>
+          </div>
+				  <div class="form-group">
+				    <label for="qty">Add Quantity</label>
+				    <input type="number" class="form-control" name="quantityAdded" id="qty" ng-model="myData.qtyAdded" required/></select>
+            <p ng-show="prodDetails.quantityAdded.$error.required && prodDetails.quantityAdded.$dirty">Quantity addeded is required.</p>
+				  </div>
+				<div class="form-group">
+					<label for="date">Date</label>
+					<input id="date" class="form-control datepicker" name="manufacturedDate" data-date-format="mm/dd/yyyy" ng-model="myData.manfDate" required/>
+          <p ng-show="prodDetails.manufacturedDate.$error.required && prodDetails.manufacturedDate.$dirty">Date is required.</p>
+				</div>
+			</form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" ng-disabled="prodDetails.$invalid" ng-click="upd(data, myData, index)" data-dismiss="modal">Save changes</button>
+      </div>
+		</div>
+	</div>
+</div>

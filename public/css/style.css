@@ -1,0 +1,177 @@
+html,body{
+	height:100%;
+}
+.wrapper{
+	height:100%;
+}
+.head{
+	background-color: #3598db;
+	padding: 5px;
+}
+.head p{
+	font-size: 18px;
+	float: left;
+	color: white;
+	text-shadow: 1px 1px #000;
+}
+.nav{
+	float: right;
+}
+.nav ul li{
+	float: left;
+	text-align: center;
+}
+#customNav li a{
+    color:#ffffff;
+}
+.head .nav ul li a{
+	text-decoration: none;
+	padding:5px 10px;
+	color: white;
+	width: 120px;
+	display: block;
+}
+.drop_down{
+	display: none;
+	background: #3598db;
+	padding-top: 10px;
+	z-index: 10;
+}
+
+.nav ul li:hover .drop_down{
+	display: block;
+	position: absolute;
+	background-color: #3598db;
+
+}
+ul.drop_down li{
+	display: block;
+	float: none;
+	color: white;
+	border-bottom: 1px solid white;
+}
+.darw{
+	width: 0;
+	height: 0;
+	border-right:5px solid transparent;
+	border-left: 5px solid transparent;
+	border-top: 5px solid white;
+	display: inline-block;
+	margin-left:5px;
+}
+.clear{
+	clear: both;
+}
+footer{
+	border-top: 1px solid grey;
+	width: 100%;
+	float:left;
+	background-color: #f2f2f2;
+}
+.foot{
+	float:left;
+	width:100%;
+}
+.foot li{
+	float: left;
+}
+.align-center{
+	text-align: center;
+}
+.foot li a{
+	text-decoration: none;
+	padding: 15px 10px;
+	display: block;
+	color: grey;
+}
+.foot span{
+	float: right;
+	padding: 15px 10px;
+}
+.content{
+min-height:calc(100% - 83px);
+background-color: #f2f2f2;
+overflow: auto;
+}
+.cont{
+	padding: 20px;
+}
+.cont h1, .cont h2{
+	font-size: 30px;
+	margin-bottom: 10px;
+}
+.cont p{
+	margin-bottom: 10px;
+}
+img.prod-image{
+	height: 95px;
+}
+.header-wrapper,.product-search,.header-wrapper h4,.header-wrapper .search-title{
+	padding-left: 0;
+	padding-right: 0;
+}
+.header-wrapper .search-title{
+	padding: 8px 0;
+}
+.header-wrapper h4{
+	padding: 10px 0;
+	font-size: 20px;
+	font-weight: bold;
+}
+.header-wrapper .form-control{
+	display: inline-block;
+	width: 150px;
+}
+label{
+	display: inline-block;
+	width: 140px;
+}
+select[name="category"]{
+	width: 173px;
+}
+.dCont{
+	overflow: hidden;
+	border: 1px solid;
+	margin-bottom: 15px;
+	padding: 10px;
+}
+.products-detail-wrapper{
+	padding: 0;
+}
+.name{
+	font-weight: bold;
+}
+.clearfix{
+	clear: both;
+}
+.order-wrapper{
+	margin-bottom: 10px;
+}
+.order-details{
+	padding: 5px 15px;
+}
+.edit{
+	position: absolute;
+	right: 0;
+}
+.billing-box{
+    padding:10px;
+    font-size: 15px;
+}
+.invoice{
+    text-align: center;
+    font-size: 40px;
+    margin-bottom: 20px;
+}
+.bill-date{
+	margin-top: -10px;
+}
+.date-label{
+	width: auto;
+}
+.form-wrapper{
+    overflow: hidden;
+}
+.bold-font{
+    font-weight: bold;
+}

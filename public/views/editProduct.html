@@ -1,0 +1,34 @@
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Edit Product</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-wrapper well"  name="prodDetails" novalidate>
+					<div class="form-group">
+				    <h1>{{data.id}}</h1>
+				  </div>
+				  <div class="form-group">
+				    <h2>{{data.pName}}</h2>
+				  </div>
+          <div class="form-group clear-fix">
+            <label for="name">Product name</label>
+            <input type="text" class="form-control" id="name" name="proName" ng-model="data.pName" required/></select>
+            <p ng-show="prodDetails.proName.$error.required && prodDetails.proName.$dirty">From place is required.</p>
+          </div>
+				  <div class="form-group">
+				    <label for="price">Price</label>
+				    <input type="number" class="form-control" name="price" id="qty" ng-model="data.price" required/></select>
+            <p ng-show="prodDetails.price.$error.required && prodDetails.price.$dirty">Quantity addeded is required.</p>
+				  </div>
+			</form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" ng-disabled="prodDetails.$invalid" ng-click="upd(data.id, data, index)" data-dismiss="modal">Save changes</button>
+      </div>
+		</div>
+	</div>
+</div>
