@@ -3,7 +3,7 @@ var app = express();
 var mongojs  = require('mongojs');
 var bodyParser = require('body-parser');
 
-var db = mongojs('local',['productsDetail','orderDetails']);
+// var db = mongojs('local',['productsDetail','orderDetails']);
 
 
 app.use(express.static(__dirname + "/public"));
