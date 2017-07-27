@@ -1,0 +1,89 @@
+{
+	"billNo" : 1,
+	"billDate" : "23/2/2017",
+	"address" : "gwalior",
+	"contact" : "9999999999",
+	"email" : "saurabh@gmail.com",
+	"name" : "Saurabh Sinha",
+	"total" : 2350000,
+	"status" : "Pending",
+	"prodDetails" : [
+		{
+			"pName" : "Dell Inspiron 15 R",
+			"dmndQty" : 50,
+			"price" : 45000,
+			"amount" : 2250000,
+			"cat" : "Laptops",
+			"delvStatus" : false
+		},
+		{
+			"pName" : "Harry Potter",
+			"dmndQty" : 100,
+			"price" : 1000,
+			"amount" : 100000,
+			"cat" : "Books",
+			"delvStatus" : false
+		}
+	]
+}
+{
+	"billNo" : 2,
+	"billDate" : "24/2/2017",
+	"address" : "delhi",
+	"contact" : "88888888",
+	"email" : "vikas@gmail.com",
+	"name" : "Vikas Sharma",
+	"total" : 2350000,
+	"status" : "Pending",
+	"prodDetails" : [
+		{
+			"pName" : "Mac Book Air 13 inches",
+			"dmndQty" : 50,
+			"price" : 70000,
+			"amount" : 2250000,
+			"cat" : "Laptops",
+			"delvStatus" : false
+		},
+		{
+			"pName" : "Harry Potter",
+			"dmndQty" : 100,
+			"price" : 1000,
+			"amount" : 100000,
+			"cat" : "Books",
+			"delvStatus" : false
+		}
+	]
+}
+{
+	"prodDetails" : [
+		{
+			"cat" : "Mobiles",
+			"pName" : "Iphone",
+			"price" : 55000,
+			"qty" : 891,
+			"id" : "Mobiles-0",
+			"dmndQty" : 44,
+			"amount" : 2420000,
+			"delvStatus" : false
+		},
+		{
+			"cat" : "Sunglasses",
+			"pName" : "Rey Ban Sunglasses",
+			"price" : 4000,
+			"qty" : 900,
+			"id" : "Sunglasses-0",
+			"dmndQty" : 8,
+			"amount" : 32000,
+			"delvStatus" : false
+		}
+	],
+	"total" : 2452000,
+	"billNo" : 4,
+	"name" : "neha",
+	"email" : "neha@sapient",
+	"address" : "mumbai",
+	"contact" : "9999999999",
+	"billDate" : "11/07/2017",
+	"status" : "Pending"
+}
+>
