@@ -5,7 +5,7 @@ var bodyParser = require('body-parser');
 
 // var db = mongojs('local',['productsDetail','orderDetails']);
 
-
+app.set('port', (process.env.PORT || 5000));
 app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.json());
 
@@ -67,5 +67,6 @@ app.post('/deleteItem', function (req, res) {
   });
 });
 
-app.listen(5000);
-console.log("Server running on port 5000");
+app.listen(app.get('port'), function() {
+  console.log('Node app is running on port', app.get('port'));
+});
