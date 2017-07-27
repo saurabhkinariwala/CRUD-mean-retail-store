@@ -3,7 +3,7 @@ var app = express();
 var mongojs  = require('mongojs');
 var bodyParser = require('body-parser');
 
-// var db = mongojs('local',['productsDetail','orderDetails']);
+var db = mongojs('mongodb://skinar:UsaPass@3191@ds111103.mlab.com:11103/productsandorders',['productsDetail','orderDetails']);
 
 app.set('port', (process.env.PORT || 5000));
 app.use(express.static(__dirname + "/public"));
