@@ -79,11 +79,6 @@ passport.use(new Strategy(
       res.render('home', { user: req.user });
     });
 
-    app.get('/*',
-      function(req, res) {
-        res.render('home', { user: req.user });
-      });
-
 
     app.get('/index',
   function(req, res){
@@ -101,6 +96,11 @@ passport.use(new Strategy(
     function(req, res) {
       res.redirect('../index');
     });
+
+    app.get('/*',
+      function(req, res) {
+        res.render('home', { user: req.user });
+      });
 
 
   app.get('/logout',
