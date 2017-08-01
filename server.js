@@ -79,6 +79,12 @@ passport.use(new Strategy(
       res.render('home', { user: req.user });
     });
 
+    app.get('/*',
+      function(req, res) {
+        res.render('../index', { user: req.user });
+      });
+
+
     app.get('/index',
   function(req, res){
     res.render('../index', { user: req.user });
