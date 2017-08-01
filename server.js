@@ -97,11 +97,6 @@ passport.use(new Strategy(
       res.redirect('../index');
     });
 
-    app.get('/*',
-      function(req, res) {
-        res.render('home', { user: req.user });
-      });
-
 
   app.get('/logout',
     function(req, res){
@@ -167,6 +162,11 @@ app.post('/deleteItem', function (req, res) {
     res.send(doc);
   });
 });
+
+app.get('/*',
+  function(req, res) {
+    res.render('home', { user: req.user });
+  });
 
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
