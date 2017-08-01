@@ -29,6 +29,7 @@ serMod.service('fetchData',function($http,$q){
       })
         return q.promise;
     }
+
 });
 
 serMod.service('retailService', function($http,$localStorage, $q){
@@ -111,5 +112,8 @@ serMod.service('retailService', function($http,$localStorage, $q){
     $http.post('/deleteItem',orderObj).then(function(data) {
       console.log(data);
     });
+  }
+  this.logout = function () {
+    $http.get('/logout');
   }
 });

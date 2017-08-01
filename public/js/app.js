@@ -6,6 +6,7 @@ $(document).on('focus','.datepicker', function(){
 	});
 })
 
+
 myModule.controller('addPdtCtrl',['$scope','retailService', 'fetchData',function($scope,retailService, fetchData){
 		$scope.details = {};
 		$scope.details.cat = "Select Category";
@@ -41,7 +42,7 @@ myModule.controller('pdtCtrl',['$scope', '$routeParams', 'retailService','$rootS
 			$scope.indexPdt = index;
 		}
 		$scope.deleteProduct = function (pdtObj) {
-			
+
 		}
 
 }]);

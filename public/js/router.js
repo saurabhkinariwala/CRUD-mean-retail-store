@@ -1,6 +1,6 @@
 var app = angular.module('retail');
 
-app.config(function($routeProvider){
+app.config(function($locationProvider, $routeProvider){
 	$routeProvider.
     when('/home',{
         templateUrl:"views/home.html"
@@ -27,4 +27,6 @@ app.config(function($routeProvider){
     })
 
     .otherwise({redirectTo:'/home'});
+
+		 $locationProvider.html5Mode(true);
 })
