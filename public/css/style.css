@@ -175,3 +175,6 @@ select[name="category"]{
 .bold-font{
     font-weight: bold;
 }
+.image-upload{
+	margin-bottom: 10px;
+}

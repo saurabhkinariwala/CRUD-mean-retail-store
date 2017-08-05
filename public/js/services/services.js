@@ -56,6 +56,14 @@ serMod.service('retailService', function($http,$localStorage, $q){
     $http.post('/addProduct',obj);
 	}
 
+  this.imageUpload = function () {
+    $http({
+    method: 'POST',
+    url: '/upload',
+    enctype:'multipart/form-data'
+  });
+  };
+
 
   this.getProdNames = function(selectedCat){
     var q = $q.defer();

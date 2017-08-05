@@ -12,6 +12,11 @@ myModule.controller('addPdtCtrl',['$scope','retailService', 'fetchData',function
 		$scope.details.cat = "Select Category";
 		$scope.options=retailService.getOptions();
 
+		$scope.imageUpload = function () {
+			var formData = $('input[name=pdtImage]').serialize();
+			console.log(formData);
+			retailService.imageUpload();
+		};
 
 		$scope.save = function(obj){
 			if(obj.cat == "Select Category"){
@@ -23,8 +28,17 @@ myModule.controller('addPdtCtrl',['$scope','retailService', 'fetchData',function
 						obj.image = "";
 						obj.addedItem = [];
 						retailService.addProduct(obj);
+						$scope.details = {};
+						$scope.addProduct.$setPristine();
+						$scope.details.cat = "Select Category";
 				});
 			}
+		}
+
+		$scope.cancelAddProduct= function () {
+			$scope.addProduct.$setPristine();
+			$scope.details = {};
+			$scope.details.cat = "Select Category";
 		}
 }]);
 

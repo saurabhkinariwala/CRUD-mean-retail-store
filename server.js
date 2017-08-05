@@ -5,6 +5,8 @@ var bodyParser = require('body-parser');
 var passport = require('passport');
 var Strategy = require('passport-local').Strategy;
 var cookieParser = require('cookie-parser');
+var multer = require('multer');
+var upload = multer({ dest: 'public/img'});
 
 var db = mongojs('mongodb://skinar:MongoPass3191@ds111103.mlab.com:11103/productsandorders',['productsDetail','orderDetails', 'usersLogin']);
 // var db = mongojs('local',['productsDetail','orderDetails','usersLogin']);
@@ -76,14 +78,14 @@ passport.use(new Strategy(
   //Define routes.
   app.get('/',
     function(req, res) {
-      res.render('home', { user: req.user });
+      res.render('loginHome', { user: req.user });
     });
 
 
-    app.get('/index',
-  function(req, res){
-    res.render('../index', { user: req.user });
-  });
+  app.get('/index',
+    function(req, res){
+      res.render('../index', { user: req.user });
+    });
 
 
   app.get('/login',
@@ -157,6 +159,10 @@ app.post('/addProduct', function (req, res) {
   });
 });
 
+app.post('/upload', upload.any(), function (req, res, next) {
+  console.log(req.files);
+});
+
 app.post('/deleteItem', function (req, res) {
   db.orderDetails.remove({"billNo":req.body.billNo}, function (err, doc){
     res.send(doc);
@@ -165,7 +171,7 @@ app.post('/deleteItem', function (req, res) {
 
 app.get('/*',
   function(req, res) {
-    res.render('home', { user: req.user });
+    res.render('loginHome', { user: req.user });
   });
 
 app.listen(app.get('port'), function() {
