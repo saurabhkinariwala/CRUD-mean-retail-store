@@ -91,7 +91,7 @@ router.get('/filterOrder', function(req, res){
 });
 
 router.post('/updateOrderStatus', function (req, res) {
-  database.db.orderDetails.update({'_id': ObjectID(req.body.id)},
+  database.db.orderDetails.update({'_id': database.ObjectID(req.body.id)},
     {
       $set:{"status" :req.body.status, "prodDetails":req.body.prodArray},
     }, function (err, docs){
@@ -155,7 +155,7 @@ router.post('/updateProductsQty', function (req, res){
 });
 
 router.post('/addProduct', function (req, res) {
-    req.body.cat_id = new mongojs.database.ObjectId(req.body.cat_id);
+    req.body.cat_id = database.ObjectId(req.body.cat_id);
   database.db.productsDetail.insert(req.body, function (err, doc){
       console.log(doc);
     res.json(doc);

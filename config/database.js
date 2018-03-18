@@ -6,8 +6,8 @@
 var mongojs  = require('mongojs');
 var ObjectId = mongojs.ObjectId;
 
- var db = mongojs('mongodb://skinar:MongoPass3191@ds111103.mlab.com:11103/productsandorders',['productsDetail','orderDetails','deliveryMemo', 'usersLogin']);
-//var db = mongojs('local',['productsDetail','orderDetails','usersLogin','deliveryMemo']);
+ var db = mongojs('mongodb://skinar:MongoPass3191@ds111103.mlab.com:11103/productsandorders',['prdcategories','productsDetail','orderDetails','deliveryMemo', 'usersLogin']);
+//var db = mongojs('local',['prdcategories', 'productsDetail','orderDetails','usersLogin','deliveryMemo']);
 
 
 module.exports = {db, ObjectId};
