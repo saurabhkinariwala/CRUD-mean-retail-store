@@ -33,8 +33,10 @@ myModule.controller('addPdtCtrl',['$scope','retailService', 'fetchData',function
                             obj.addedItem = [];
                             retailService.addProduct(obj);
                             $scope.details = {};
+//                            $scope.imageSrc = '';
                             $scope.addProduct.$setPristine();
                             $scope.details.cat = $scope.options[0];
+                            alert('Product added');
 				
 			}
 		}

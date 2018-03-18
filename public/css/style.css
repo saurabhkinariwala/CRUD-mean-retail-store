@@ -320,6 +320,7 @@ table .thead-dark th{
     position: absolute;
     top: 30%;
     right: 20px;  
+    z-index: 100;
 }
 
 .delivery-memo-wrapper{
