@@ -1,0 +1,63 @@
+<header class="navbar-inverse head">
+    <p class="comp-name">Online Retail Store</p>
+<!--    <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+      <span class="sr-only">Toggle Navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>-->
+<!--            <nav class="nav">
+                <ul class="collapse navbar-collapse">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="">Products <div class="darw"></div></a>
+                            <ul class="drop_down">
+                                <li ng-repeat="product in productLists">
+                                   <a href="#Pdt/{{product._id}}">{{product.catname}}</a>
+                                </li>
+                            </ul>
+
+                        </li>
+                        <li><a href="#AddPdt">Add Product</a></li>
+                        <li><a href="#Billing">Billing</a></li>
+                        <li><a href="#Orders">Order History</a></li>
+                </ul>
+            </nav>-->
+
+	 <!--navigation--> 
+	<div class="navigation">
+		<div class="container">
+			<nav class="navbar navbar-default">
+				 <!--Brand and toggle get grouped for better mobile display--> 
+				<div class="navbar-header nav_2">
+					<button type="button" class="navbar-toggle collapsed navbar-toggle1" data-toggle="collapse" data-target="#bs-megadropdown-tabs">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+				</div> 
+				<div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
+					<ul class="nav navbar-nav">
+						<li><a href="#home" class="act">Home</a></li>	
+						 <!--Mega Menu--> 
+						<li class="dropdown">
+							<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">Products <b class="caret"></b></a>
+							<ul class="dropdown-menu multi-column columns-3">															
+                                                            <li ng-repeat="product in productLists">
+                                                                <a href="#Pdt/{{product._id}}">{{product.catname}}</a>
+                                                            </li>
+							</ul>
+						</li>
+						<li><a href="#AddPdt">Add Product</a></li> 
+				 
+						<li><a href="#Billing">Billing</a></li>
+                                                
+                                                <li><a href="#Orders">Order History</a></li>
+					</ul>
+				</div>
+			</nav>
+		</div>
+	</div>
+
+            <div class="clear"></div>
+</header> 

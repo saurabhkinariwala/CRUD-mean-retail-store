@@ -1,6 +1,6 @@
-<div class="cont">
-	<h2>Add New Product</h2>
-	<div class="col-xs-12">
+<div class="cont add-pdt-wrapper">
+	<h2 class="col-xs-12 add-pdt-heading">Add New Product</h2>
+	<div class="col-xs-12 add-pdt-form">
 
 		<form class="form-horizontal" name="addProduct" novalidate>
 
@@ -8,7 +8,7 @@
 		    <label for="inputname" class="col-sm-3 control-label">Brand Name</label>
 		    <div class="col-sm-9">
 		      <input type="text" class="form-control" ng-model="details.bName" name="brandName" id="inputname" placeholder="Brand Name" required>
-					<p ng-show="addProduct.brandName.$error.required && addProduct.brandName.$dirty">Brand name is required.</p>
+                        <p ng-show="addProduct.brandName.$error.required && addProduct.brandName.$dirty">Brand name is required.</p>
 		    </div>
 		  </div>
 
@@ -23,7 +23,7 @@
 		  <div class="form-group">
 			  <label for="Pdt" class="col-sm-3 control-label">Select Category</label>
 			  <div class="col-sm-9">
-			  	<select class="form-control" placeholder="select" id="Pdt" ng-options="opt for opt in options" ng-model="details.cat" name="category" required></select>
+			  	<select class="form-control" placeholder="select" id="Pdt" ng-options="opt as opt.catname for opt in options" ng-model="details.cat" name="category" required></select>
 					<p ng-show="addProduct.category.$error.required && addProduct.category.$dirty">Select category.</p>
 			  </div>
 			</div>
@@ -60,22 +60,19 @@
 			<div class="form-group">
 				<label class="col-sm-3 control-label">Image Upload</label>
 				<div class="col-sm-9">
-					<!-- <form method="post" action="/upload" enctype="multipart/form-data"> -->
-						<input class="image-upload" type="file" name="pdtImage"/>
-						<input type="submit" name="submit" ng-click="imageUpload()" value="submit"/>
-					<!-- </form> -->
+						<input class="image-upload" ng-file-select="onFileSelect($files)" type="file" name="pdtImage"/>
+					 <b>Preview:</b><br/>
+				   <i ng-hide="imageSrc">No image choosed</i>
+				   <img ng-src="{{imageSrc}}" /><br/>
+     </div>
 				</div>
-				<!-- <label for="image" class="col-sm-3 control-label">Image Upload</label> -->
-				<!-- <div class="col-sm-9">
-					<button>Image Upload</button>
-				</div> -->
 			</div>
-		  <div class="form-group">
-		    <div class="col-sm-offset-3 col-sm-9">
+		
+		    <div class="col-xs-12 col-sm-offset-3 col-sm-9">
 					<button type="submit" ng-click="save(details)" ng-disabled="addProduct.$invalid" class="btn btn-primary">Save</button>
 		      <button type="submit" class="btn btn-default" ng-click=cancelAddProduct()>Cancel</button>
 		    </div>
-		  </div>
+	
 
 
 </form>

@@ -13,7 +13,7 @@ app.config(function($locationProvider, $routeProvider){
         templateUrl:"views/billing.html",
         controller:"billingCtrl"
     })
-    .when('/Pdt/:cat',{
+    .when('/Pdt/:_id',{
         templateUrl:"views/products.html",
         controller:'pdtCtrl'
     })
@@ -21,12 +21,14 @@ app.config(function($locationProvider, $routeProvider){
         templateUrl:"views/productHistory.html",
         controller:'dtlCtrl'
     })
-		.when('/Orders',{
+    .when('/Orders',{
         templateUrl:"views/orderHistory.html",
         controller:"orderHistoryCtrl"
     })
 
-    .otherwise({redirectTo:'/home'});
 
-		 $locationProvider.html5Mode(true);
-})
+    .otherwise({redirectTo:'/home'});
+       $locationProvider.html5Mode(true);
+
+	
+});

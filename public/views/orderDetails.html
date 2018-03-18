@@ -7,23 +7,22 @@
       </div>
       <div class="modal-body">
         <div class="row order-wrapper">
-          <p class="pull-left col-sm-6 order-details"> Name: {{data.name}}</p>
-          <p class="pull-left col-sm-6 order-details"> Address: {{data.address}}</p>
-          <p class="pull-left col-sm-6 order-details"> Email id: {{data.email}}</p>
-          <p class="pull-left col-sm-6 order-details"> Contact: {{data.contact}}</p>
-          <p class="pull-left col-sm-6 order-details"> Date: {{data.billDate}}</p>
+          <p class="pull-left col-xs-12 col-sm-6 order-details"> Name: {{data.name}}</p>
+          <p class="pull-left col-xs-12 col-sm-6 order-details"> Address: {{data.address}}</p>
+          <p class="pull-left col-xs-12 col-sm-6 order-details"> Email id: {{data.email}}</p>
+          <p class="pull-left col-xs-12 col-sm-6 order-details"> Contact: {{data.contact}}</p>
+          <p class="pull-left col-xs-12 col-sm-6 order-details"> Date: {{data.billDate}}</p>
         </div>
         <div class="clearfix">
           <table class="table table-bordered">
-             <thead>
+             <thead class="thead-dark">
                  <tr>
-                     <td class="col-sm-1"><span class="bold-font">Sr No</span></td>
-                     <td class="col-sm-3"><span class="bold-font">Product Name</span></td>
-                     <td class="col-sm-2"><span class="bold-font">Qty</span></td>
-                     <td class="col-sm-2"><span class="bold-font">Price</span></td>
-                     <td class="col-sm-2"><span class="bold-font">Amount</span></td>
-                     <td class="col-sm-2"><span class="bold-font">Status</span></td>
-
+                     <th class="col-xs-1"><span class="bold-font">Sr No</span></th>
+                     <th class="col-xs-3"><span class="bold-font">Product Name</span></th>
+                     <th class="col-xs-2"><span class="bold-font">Qty</span></th>
+                     <th class="col-xs-2"><span class="bold-font">Price</span></th>
+                     <th class="col-xs-2"><span class="bold-font">Amount</span></th>
+                     <th class="col-xs-2"><span class="bold-font">Status</span></th>
                  </tr>
              </thead>
              <tbody class="billing-body">
@@ -34,7 +33,6 @@
                    <td>{{pdts.price}}</td>
                    <td>{{pdts.amount}}</td>{{pdts.delvStatus}}
                    <td class="align-center"><input type="checkbox" ng-model="pdts.delvStatus" ng-checked="pdts.delvStatus"/></td>
-
                  </tr>
                   <tr>
                       <td colspan="3"></td>

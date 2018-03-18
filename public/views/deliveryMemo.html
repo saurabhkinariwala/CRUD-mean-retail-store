@@ -1,0 +1,47 @@
+<div class="modal fade show-dm-wrapper" id="showDeliveryDetails" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Order {{orderdetail.billNo}}</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row order-wrapper">
+          <p class="pull-left col-xs-12 col-sm-6 order-details"> Name: {{orderdetail.name}}</p>
+          <p class="pull-left col-xs-12 col-sm-6 order-details"> Address: {{orderdetail.address}}</p>
+          <p class="pull-left col-xs-12 col-sm-6 order-details"> Date: {{orderdetail.billDate}}</p>
+        </div>
+        <div class="clearfix">
+          <div class="delivery-memo-wrapper" ng-repeat="dm in deliverydata">
+            <span class="glyphicon glyphicon-print print-dm" ng-click="printDm(dm)"></span>
+            <p class="dm-details">Delivery Number : {{dm.deliveryNumber}}</p>
+            <p class="dm-details">Transport : {{dm.transport}}</p>
+            <p class="dm-details">Delivery Date : {{dm.DeliveryDate}}</p>
+            <table class="table table-bordered">
+               <thead class="thead-dark">
+                   <tr>
+                       <th class="col-sm-1"><span class="bold-font">Sr No</span></th>
+                       <th class="col-sm-3"><span class="bold-font">Product Name</span></th>
+                       <th class="col-sm-2"><span class="bold-font">Sent Qty</span></th>
+                       <th class="col-sm-2"><span class="bold-font">Bundles</span></th>
+                   </tr>
+               </thead>
+               <tbody class="delivery-table">
+                   <tr ng-repeat="item in dm.deliveryDetails" class="newRow">
+                     <td>{{$index+1}}</td>
+                     <td>{{item.pdtName.prodName}}</td>
+                     <td>{{item.sentQty}}</td>
+                     <td>{{item.bundles}}</td>
+                   </tr>
+               </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" ng-click="updStatus()" data-dismiss="modal">OK</button>
+      </div>
+		</div>
+	</div>
+</div>

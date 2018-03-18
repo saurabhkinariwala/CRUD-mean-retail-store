@@ -1,0 +1,97 @@
+<div class="modal fade create-delivery-memo-wrapper" id="createDeliveryMemo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h1 class="invoice">Create Delivery Memo</h1>
+        <h4 class="modal-title create-dm-orderno" id="myModalLabel">Order {{data.billNo}}</h4>
+      </div>
+      <div class="modal-body">
+				<div class="delivery-box">
+					<div class="form-group col-sm-8">
+                                            <label for="delivery-number" class="control-label delivery-number delivery-label">Delivery Number: </label>							
+                                            <input id="delivery-number" name="deliveryNumber" class="form-control delivery-input" ng-model="deliveryObj.deliveryNumber">								
+					</div>
+                                        <div class="form-group col-sm-8">
+                                            <label for="date" class="control-label date-label delivery-label">Date :</label>
+                                            <input id="date" name="deliveryDate" class="form-control datepicker delivery-input" ng-model="deliveryObj.DeliveryDate" data-date-format="mm/dd/yyyy" >                                               
+                                        </div>
+                                        <div class="form-group col-sm-8">
+                                            <label for="transport" class="control-label transport delivery-label">Transport :</label>
+                                            <input id="transport" name="transport" class="form-control delivery-input" ng-model="deliveryObj.transport" required/>
+                                        </div>
+				    <ng-form name="deliveryForm" novalidate>
+				        <table class="table table-bordered">
+				            <thead>
+											<th>Pdt Name</th>
+											<th>Order Qty</th>
+											<th>Balance Qty</th>
+											<th>Sent Qty</th>
+											<th>Bundles</th>
+											<th></th>
+										</thead>
+				            <tbody>
+				                <tr>
+				                  <td class="col-md-4">
+														<select ng-model="sentProduct.pdtName"
+															ng-options="opt as opt.prodName for opt in prodOptions"
+															ng-blur="deliverProdBlur(sentProduct.pdtName)" 
+															placeholder="Select Product Name" 
+															name="productName" 
+															id="search-product" class="form-control" required>
+													 	</select>
+				                  	<p ng-if="deliveryForm.productName.$error.required && deliveryForm.productName.$dirty">Enter the product</p>
+													</td>
+													
+													<td class="col-md-3"><input ng-model="sentProduct.orderQty" type="number" name="orderQty" class="form-control" id="sent-qty" readonly/>
+
+													<td class="col-md-3"><input ng-model="sentProduct.balQty" type="number" name="balQty" class="form-control" id="bal-qty" readonly/>
+													<p ng-if="deliveryForm.balQty.$error.required && deliveryForm.balQty.$dirty">Enter the quantity</p></td>
+													
+				                  <td class="col-md-3"><input ng-model="sentProduct.sentQty" type="number" name="sentQty" placeholder=0 class="form-control" id="sent-qty"/>
+													<p ng-if="deliveryForm.sentQty.$error.required && deliveryForm.sentQty.$dirty">Enter the quantity</p></td>
+
+				                  <td class="col-md-3"><input type="number"  ng-model="sentProduct.bundles" name="bundles" id="dmnd-qty" min="0" placeholder="Bundles" class="form-control" required/>
+				                  <p ng-if="deliveryForm.bundles.$invalid && deliveryForm.bundles.$dirty">Enter the product quantity</p></td>
+
+                          <td class="col-md-2">
+														<button id="addBtn" ng-hide="editDeliveryBtn" type="submit" class="btn-primary btn" ng-click="addDeliveryItem(deliveryForm.$valid)">Add</button>
+														<button id="updateBtn" type="submit" ng-show="editDeliveryBtn" class="btn-primary btn" ng-click="updateDeliveryItem()">Update</button>
+				                </tr>
+
+				            </tbody>
+				        </table>
+				    </ng-form>
+				    <div class="cont">
+				      <table class="table table-bordered">
+				         <thead class="thead-dark">
+				             <tr>
+				                 <th class="col-sm-1"><span class="bold-font">Sr No</span></th>
+				                 <th class="col-sm-5"><span class="bold-font">Product Name</span></th>
+				                 <th class="col-sm-3"><span class="bold-font">Qty</span></th>
+                                                 <th class="col-sm-3"><span class="bold-font">Bundles</span></th>
+				             </tr>
+				         </thead>
+				         <tbody class="billing-body">
+				             <tr ng-repeat="deliverPdt in deliveryObj.deliveryDetails" class="newRow">
+				               <td>{{$index+1}}</td>
+				               <td>{{deliverPdt.pdtName.prodName}}</td>
+											 <td>{{deliverPdt.pdtName.balQty}}</td>
+				               <td>{{deliverPdt.sentQty}}</td>
+                       <td>{{deliverPdt.bundles}}</td>
+				               <td><span id="dlteBtn" ng-click="deleteDeliveryItem($index)" class="glyphicon glyphicon-trash"></span></td>
+				               <td><span class="glyphicon glyphicon-edit" ng-click="editDeliveryItem(deliverPdt,$index)"></span></td>
+				             </tr>
+				         </tbody>
+				</table>
+				</div>
+				</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary" ng-click="printDeliveryMemo()" data-dismiss="modal">Print</button>
+        <button type="button" class="btn btn-primary" ng-click="createDeliveryMemo()" data-dismiss="modal">OK</button>
+      </div>
+		</div>
+	</div>
+</div>

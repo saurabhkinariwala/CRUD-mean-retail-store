@@ -1,37 +1,57 @@
 <div class="cont">
-	<div class="header-wrapper col-sm-12">
-		<h4 class="col-sm-3">Products ->{{category}}</h4>
-		<div class="form-inline">
+	<div class="header-wrapper">
+		<h4 class="col-sm-3 category-name">{{category}}Category</h4>
+<!--		<div class="form-inline">
 			<div class="form-group col-sm-9 col-xs-12 product-search">
 				<div class="item-search col-sm-6 col-xs-12">
 					<span class="search-title pull-left">Search Item :&nbsp; </span>
 					<input type="text" class="form-control search-bar" ng-model="searchText" placeholder="Enter the item to be searched"/>
+					<input type="submit" ng-click="searchItem(searchText)" value="OK"/>
 				</div>
 				<div class="qty-search col-sm-6 col-xs-12">
 					<span class="search-title pull-left">Search Qty :&nbsp; </span>
 					<input type="text" class="form-control search-bar" ng-model="searchQty" placeholder="Search for qty greater than"/>
+					<input type="submit" ng-click="searchQuantity(searchQty)" value="OK"/>
 				</div>
 			</div>
-		</div>
+		</div>-->
 	</div>
-	<div class="clearfix">
-	<div class="col-xs-12 dCont" ng-repeat="pdt in prodCat | filter:{pName:searchText} | limitTo:limitToModel | greaterThan:searchQty">
-		<div class="products-detail-wrapper col-xs-12 col-md-6">
-			<p>Id : {{pdt.id}}</p>
-			<p>Name : {{pdt.pName}}</p>
-			<p class="price">Price : {{pdt.price | rupeeFilter}}</p>
-			<p class="clearfix">Available Qty : {{pdt.qty}}</p>
-		</div>
-	<img ng-src="{{pdt.image}}" alt="image" class="col-xs-12 col-md-6 prod-image pull-right"/>
-	<p class="clearfix pull-left">
-		<button ng-click="addQtyOrEditPdt(pdt, $index)" data-toggle="modal" data-target="#editModal">Edit Product</button>
-		<button ng-click="addQtyOrEditPdt(pdt, $index)" data-toggle="modal" data-target="#myModal">Add Quantity</button>
-		<button><a href="#Pdthstry/{{pdt.id}}">Product history</a></button>
-		<button ng-click="deleteProduct(pdt)">Delete Product</button>
-	</p>
-	</div>
+	<div class="clearfix" ng-hide="isShow">
+            <!-- <div class="col-xs-12 dCont" ng-repeat="pdt in prodCat | limitTo:limitToModel | greaterThan:searchQty"> -->
+            <div class="col-xs-12 dCont" ng-repeat="pdt in prodCat">
+                <img ng-src="{{pdt.image}}" alt="image" class="col-xs-12 col-sm-4 col-md-5 prod-image"/>
+                <div class="products-detail-wrapper col-xs-12 col-sm-8 col-md-6">
+                        <p class="pdt-name col-xs-12">{{pdt.pName}}</p>
+                        <p class="pdt-desc col-xs-12">{{pdt.desc}}</p>
+                        <p class="pdt-price col-xs-5">{{pdt.price | rupeeFilter}}/-</p>
+                        <p class="available-qty col-xs-7 clearfix">Available Qty : {{pdt.qty}}</p>
+                </div>
+
+                <div class="col-xs-12 col-sm-8 col-md-7 buttons-wrapper">
+                    <div class="edit-pdt-btn-wrapper col-xs-6 col-md-3">
+                        <button class="edit-pdt" ng-click="addQtyOrEditPdt(pdt._id, pdt.pName)" data-toggle="modal" data-target="#editModal">Edit Product</button>
+                    </div>
+
+                    <div class="add-qty-btn-wrapper col-xs-6 col-md-3">
+                        <button class="add-qty" ng-click="addQtyOrEditPdt(pdt._id, pdt.pName)" data-toggle="modal" data-target="#myModal">Add Quantity</button>
+                    </div>
+
+                    <div class="pdt-hstry-btn-wrapper col-xs-6 col-md-3">
+                        <a class="btn pdt-hstry" href="#Pdthstry/{{pdt._id}}">Product history</a>
+                    </div>
+
+                    <div class="del-pdt-btn-wrapper col-xs-6 col-md-3">
+                        <button class="del-pdt" ng-click="deleteProduct(pdt._id)">Delete Item</button>
+                    </div>                                                      
+                        
+                </div>
+            </div>
+        </div>
+
+        <p class="no-items" ng-show="isShow"> No matched items found... </p>
+
+	<!-- <button ng-click="limitToModel = 4" type="submit" class="btn btn-default">Show More</button> -->
+	<button ng-click="loadMore()" ng-show="loadMoreBtn" type="submit" class="btn btn-default">Show More</button>
 </div>
-	<button ng-click="limitToModel = 8" type="submit" class="btn btn-default">Show More</button>
-</div>
-<pdt-modal data="pdtData" index="indexPdt"></pdt-modal>
-<edit-product data="pdtData" index="indexPdt"></edit-product>
+<pdt-modal data="pdtObj" prodcat="prodCat"></pdt-modal>
+<edit-product data="pdtObj" index="indexPdt"></edit-product>

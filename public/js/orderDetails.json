@@ -86,4 +86,26 @@
 	"billDate" : "11/07/2017",
 	"status" : "Pending"
 }
->
+{
+	"_id" : ObjectId("5a816cf6b54ec4092f76af8c"),
+	"prodDetails" : [
+		{
+			"cat" : "Mobiles",
+			"pName" : "Iphone 5s",
+			"price" : 50003,
+			"qty" : 170,
+			"id" : "Mobiles-1",
+			"dmndQty" : 78,
+			"amount" : 3900234,
+			"delvStatus" : true
+		}
+	],
+	"total" : 3900234,
+	"billNo" : 20,
+	"billDate" : "14/02/2018",
+	"name" : "anurag",
+	"email" : "anurag@gmail.com",
+	"address" : "delhi",
+	"contact" : "9090909090",
+	"status" : "Completed"
+}

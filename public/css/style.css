@@ -1,67 +1,360 @@
+@font-face {
+    font-family: "PlanerDemiBold";
+    src: url("../fonts/PlanarDemiBold/34D8B4_0_0.eot?#iefix");
+    src: url("../fonts/PlanarDemiBold/34D8B4_0_0.eot?#iefix") format("eot"),
+         url("../fonts/PlanarDemiBold/34D8B4_0_0.woff2") format("woff2"),
+         url("../fonts/PlanarDemiBold/34D8B4_0_0.woff") format("woff"),
+         url("../fonts/PlanarDemiBold/34D8B4_0_0.ttf") format("truetype"),
+         url("../fonts/PlanarDemiBold/Planer-DemiBold.svg#Planer-DemiBold") format("svg");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "ProximaNovaRegular";
+    src: url("../fonts/ProximaNovaRegular/34D8B4_6B_0.eot?#iefix");
+    src: url("../fonts/ProximaNovaRegular/34D8B4_6B_0.eot?#iefix") format("eot"),
+         url("../fonts/ProximaNovaRegular/34D8B4_6B_0.woff2") format("woff2"),
+         url("../fonts/ProximaNovaRegular/34D8B4_6B_0.woff") format("woff"),
+         url("../fonts/ProximaNovaRegular/34D8B4_6B_0.ttf") format("truetype"),
+         url("../fonts/ProximaNovaRegular/ProximaNova-Regular.svg#ProximaNova-Regular") format("svg");
+    font-weight: normal;
+    font-style: normal;
+}
+
 html,body{
 	height:100%;
+        font-family: PlanerDemiBold;
 }
-.wrapper{
-	height:100%;
-}
-.head{
-	background-color: #3598db;
-	padding: 5px;
-}
-.head p{
-	font-size: 18px;
-	float: left;
-	color: white;
-	text-shadow: 1px 1px #000;
-}
-.nav{
-	float: right;
-}
-.nav ul li{
-	float: left;
-	text-align: center;
-}
-#customNav li a{
-    color:#ffffff;
-}
-.head .nav ul li a{
-	text-decoration: none;
-	padding:5px 10px;
-	color: white;
-	width: 120px;
-	display: block;
-}
-.drop_down{
-	display: none;
-	background: #3598db;
-	padding-top: 10px;
-	z-index: 10;
-}
-
-.nav ul li:hover .drop_down{
-	display: block;
-	position: absolute;
-	background-color: #3598db;
-
-}
-ul.drop_down li{
-	display: block;
-	float: none;
-	color: white;
-	border-bottom: 1px solid white;
-}
-.darw{
-	width: 0;
-	height: 0;
-	border-right:5px solid transparent;
-	border-left: 5px solid transparent;
-	border-top: 5px solid white;
-	display: inline-block;
-	margin-left:5px;
-}
-.clear{
+.clearfix{
 	clear: both;
 }
+
+table .thead-dark th{
+    color: #fff;
+    background-color: #212529;
+    border-color: #32383e;
+    text-align: center;
+}
+
+.wrapper{
+	height:100%;
+        padding: 0;
+}
+.comp-name{
+    text-align: center;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    text-transform: uppercase;
+    color: #fff;
+    letter-spacing: 0.512px;
+        
+}
+.head{
+	background-color: rgb(0, 113, 220);
+	padding: 0;
+}
+
+.header-wrapper .category-name, .add-pdt-wrapper .add-pdt-heading, .order-history-wrapper .orders-heading,
+.products-history-wrapper .products-history-heading{
+    margin: 20px 0 10px;
+    font-size: 36px;
+    font-weight: bold;
+}
+/*-- navigation --*/
+.navbar-default .navbar-nav > li > a {
+    color: #fff;
+    -webkit-transition:.5s all;
+    -moz-transition:.5s all; 
+    transition:.5s all;
+}
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus,
+.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus{
+    background-color: transparent;
+}
+.navbar-default .navbar-collapse, .navbar-default .navbar-form {
+    border: none;
+}
+.nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
+    color: #d8703f;
+}
+.navbar-default .navbar-nav > li > a:focus, .navbar-default .navbar-nav > li > a:hover, 
+.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, 
+.navbar-default .navbar-nav > .open > a:focus,
+.navbar-default .navbar-nav .open .dropdown-menu > li > a:hover, 
+.navbar-default .navbar-nav .open .dropdown-menu > li > a:focus{
+    color: #ff5063 !important;
+}
+.navbar-default, .nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
+    background: none;
+    border: none;
+}
+.navbar-collapse {
+    padding: 0;
+}
+
+.dropdown-menu.columns-3 {
+    padding: 10px 0;	
+    width: inherit;
+    text-align: center;
+    min-width: 140px;
+}
+
+.nav > li > a:hover, .nav > li > a:focus {
+    background: none;
+}
+
+.navbar-nav > li > a {
+    padding: 13px 0px;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-family: ProximaNovaRegular;
+}
+
+.navbar {
+    margin-bottom: 0;
+	z-index: 100;
+}
+.navigation {
+	text-align:center;
+	background:#3c43a4;
+}
+.navbar-nav {
+    float: none;
+     margin: 0; 
+}
+
+.navbar-default .navbar-toggle {
+        border-color: #fff;
+        float: none;
+        margin-right: 0;
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+        background-color: #fff;
+}
+.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
+        background: transparent;
+}
+
+.navbar-nav > li:nth-child(1) {
+        margin-left: 0;
+}
+/*.col-sm-3:nth-child(2) {
+        margin:48px 0;
+}*/
+
+.navbar-default .navbar-nav .open .dropdown-menu > li > a {
+        color: #fff;
+        font-family: ProximaNovaRegular;
+}
+/*-- //navigation --*/
+
+/*Home Page*/
+
+.home-page{
+	padding: 20px;
+}
+.home-page h1, .home-page h2{
+	font-size: 30px;
+	margin-bottom: 10px;
+}
+.home-page p{
+	margin-bottom: 10px;
+}
+
+/*Home page ends here*/
+
+/*Products page*/
+
+.dCont{
+    background: #f3f3f3;
+    padding: 20px 0;
+    margin-bottom: 20px;
+}
+
+.dCont .prod-image{
+    margin-bottom: 20px;
+}
+.products-detail-wrapper .pdt-name{
+    font-size: 24px;
+    color: #ff5063;
+    text-decoration: none;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 10px;
+}
+.products-detail-wrapper .pdt-desc{
+    color: #999;
+    font-size: 16px;
+    padding-right: 16px;;
+    font-weight: 300;
+    text-align: center;
+    margin-bottom: 15px;
+}
+.products-detail-wrapper .pdt-price,.products-detail-wrapper .available-qty{
+    font-size: 18px;
+    color: #212121;
+    margin-bottom: 25px;
+    font-weight: 600;
+}
+.products-detail-wrapper .available-qty{
+    text-align: right;
+}
+.dCont .buttons-wrapper, .order-buttons-wrapper{
+    margin-top: 20px;
+    padding: 0;
+}
+.dCont .edit-pdt, .dCont .add-qty, .dCont .pdt-hstry, .dCont .del-pdt,
+.order-buttons-wrapper .show-details, .order-buttons-wrapper .edit-order, .order-buttons-wrapper .deliver-memo,
+.order-buttons-wrapper .create-delivery-memo{
+    font-size: 14px;
+    color: #fff;
+    margin: 0;
+    text-decoration: none;
+    text-transform: capitalize;
+    padding: 8px 24px;
+    border: 1px solid #c1c1c1;
+    border-radius: 5px;
+    min-width: 140px;
+    margin-bottom: 15px;
+    font-family: ProximaNovaRegular;
+    outline: none;
+    -webkit-transition: .5s all;
+    -moz-transition: .5s all;
+    transition: .5s all;
+}
+.dCont .edit-pdt, .dCont .add-qty, .dCont .pdt-hstry,
+.order-buttons-wrapper .show-details, .order-buttons-wrapper .edit-order, .order-buttons-wrapper .deliver-memo,
+.order-buttons-wrapper .create-delivery-memo{
+    background: #0059ad;
+}
+
+.dCont .del-pdt{
+    background: red;
+}
+
+.dCont .pdt-hstry, .order-buttons-wrapper .edit-order{
+    line-height: 1;
+}
+.content{
+    min-height:calc(100% - 83px);
+    /*background-color: #f2f2f2;*/
+    overflow: auto;
+}
+
+.products-history-wrapper .product-id{
+    margin-bottom: 20px;
+    font-size: 18px;
+}
+.products-history-wrapper .product-history-text{
+    margin-bottom: 10px;
+    font-size: 20px;
+    text-align: center;
+}
+
+.products-history-wrapper table td{
+    text-align: center;
+}
+/*Products page ends here*/
+
+/*Add product page starts*/
+
+.add-pdt-wrapper .add-pdt-form{
+    background: #f2f2f2;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    margin-bottom: 10px;
+}
+
+.image-upload{
+	margin-bottom: 10px;
+
+}
+/*Add product page ends*/
+
+/*Billing page starts here*/
+.billing-box{
+    padding:10px;
+    font-size: 15px;
+}
+.invoice{
+    text-align: center;
+    font-size: 40px;
+    margin-bottom: 30px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e3e3e3;
+}
+.billing-box .bill-date-wrapper{
+    margin-top: -10px;
+    text-align: right;
+}
+
+.billing-box .bill-date-wrapper .bill-date{
+    width: 60%;
+    display: inline-block;
+}
+
+.billing-box .form-wrapper{
+    overflow: hidden;
+}
+
+.billing-box .form-wrapper input{
+    width: 100%;
+}
+
+/*Billing page ends here*/
+
+/*Order details pade starts here*/
+
+.order-datails-wrapper{
+    padding: 0;
+}
+
+.order-datails-wrapper .order-details{
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+.order-history-wrapper .delete-order{
+    position: absolute;
+    top: 30%;
+    right: 20px;  
+}
+
+.delivery-memo-wrapper{
+	padding: 10px;
+	background: #f3f3f3;
+}
+.delivery-memo-wrapper .dm-details{
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.create-delivery-memo-wrapper .create-dm-orderno, .show-dm-wrapper .modal-title{
+    font-size: 20px;
+}
+.delivery-box .delivery-input{
+    display: inline-block;
+    width: 50%;
+}
+.delivery-box label{
+    min-width: 40%;
+    font-size: 18px;
+}
+.order-wrapper .order-details{
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+.delivery-memo-wrapper .print-dm{
+    position: absolute;
+    right: 40px;
+    top: 40%;
+}
+
+/*Order details page ends here*/
+
+/*Footer*/
 footer{
 	border-top: 1px solid grey;
 	width: 100%;
@@ -78,103 +371,118 @@ footer{
 .align-center{
 	text-align: center;
 }
+.dn{
+	display: none;
+}
 .foot li a{
 	text-decoration: none;
 	padding: 15px 10px;
 	display: block;
-	color: grey;
+	color: #2890f3;
+        font-size: 14px;
+        letter-spacing: 0.448px;
+        font-family: ProximaNovaRegular;
 }
 .foot span{
 	float: right;
 	padding: 15px 10px;
 }
-.content{
-min-height:calc(100% - 83px);
-background-color: #f2f2f2;
-overflow: auto;
+
+/*Fotter ends*/
+
+@media (min-width:768px){
+  
+    .navbar-nav > li > a {
+        padding: 20px;
+    }
+    .dropdown-menu.columns-3 {
+        background: #3c43a4;
+    }
+    
+    .nav ul li{
+	float: left;
+	text-align: center;
+        width: 100%;
+    }
+    
+    .products-detail-wrapper .pdt-desc, .products-detail-wrapper .pdt-name, .products-detail-wrapper .available-qty{
+        text-align: left;
+    }
+    
+    .billing-box .bill-date-wrapper .bill-date{
+        width: 30%;
+    }
+    
+
 }
-.cont{
-	padding: 20px;
-}
-.cont h1, .cont h2{
-	font-size: 30px;
-	margin-bottom: 10px;
-}
-.cont p{
-	margin-bottom: 10px;
-}
-img.prod-image{
-	height: 95px;
-}
-.header-wrapper,.product-search,.header-wrapper h4,.header-wrapper .search-title{
-	padding-left: 0;
-	padding-right: 0;
-}
-.header-wrapper .search-title{
-	padding: 8px 0;
-}
-.header-wrapper h4{
-	padding: 10px 0;
-	font-size: 20px;
-	font-weight: bold;
-}
-.header-wrapper .form-control{
-	display: inline-block;
-	width: 150px;
-}
-label{
-	display: inline-block;
-	width: 140px;
-}
-select[name="category"]{
-	width: 173px;
-}
-.dCont{
-	overflow: hidden;
-	border: 1px solid;
-	margin-bottom: 15px;
-	padding: 10px;
-}
-.products-detail-wrapper{
-	padding: 0;
-}
-.name{
-	font-weight: bold;
-}
-.clearfix{
-	clear: both;
-}
-.order-wrapper{
-	margin-bottom: 10px;
-}
-.order-details{
-	padding: 5px 15px;
-}
-.edit{
-	position: absolute;
-	right: 0;
-}
-.billing-box{
-    padding:10px;
-    font-size: 15px;
-}
-.invoice{
-    text-align: center;
-    font-size: 40px;
-    margin-bottom: 20px;
-}
-.bill-date{
-	margin-top: -10px;
-}
-.date-label{
-	width: auto;
-}
-.form-wrapper{
-    overflow: hidden;
-}
-.bold-font{
-    font-weight: bold;
-}
-.image-upload{
-	margin-bottom: 10px;
+
+@media (min-width:1024px){
+    
+    .navbar-nav > li:nth-child(1) {
+                margin-left: 96px;
+    }
+
+    .nav > li > a {
+            padding: 10px 10px;
+    }
+    .nav-tabs > li > a {
+            font-size: 9px;
+    }
+    .navbar-nav > li > a {
+            padding: 20px 30px !important;
+    }
+
+    .head p{
+	font-size: 18px;
+	color: white;
+	text-shadow: 1px 1px #000;
+    }
+    .nav{
+            float: right;
+    }
+    .nav ul li{
+            float: left;
+            text-align: center;
+            width: 100%;
+    }
+    #customNav li a{
+        color:#ffffff;
+    }
+    
+    .billing-box .order-no{
+        font-size: 20px;
+    }
+    .order-datails-wrapper .order-details{
+        font-size: 20px;        
+    }
+
+    label{
+        display: inline-block;
+        width: 140px;
+    }
+    .delivery-label{
+        width: auto;
+    }
+
+    select[name="category"]{
+        width: 173px;
+    }
+    .products-detail-wrapper{
+        padding: 0;
+    }
+    .name{
+        font-weight: bold;
+    }
+
+    .edit{
+        position: absolute;
+        right: 0;
+    }
+
+    .date-label{
+        width: auto;
+    }
+
+
+    
 }

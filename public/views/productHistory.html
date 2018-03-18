@@ -1,28 +1,28 @@
-<div class="cont">
-	<h1> Showing details about {{pro.pName}}  </h1>
-	<div class="col-xs-12 dCont">
-			<p class="col-xs-12"><span class="col-xs-4">Id</span><span class="col-xs-8">{{pro.id}}</span></p>
-			<p class="col-xs-12"><span class="col-xs-4">Product Name</span><span class="col-xs-8">{{pro.pName}}</span></p>
-			<h4>Product History</h4>
-			<table class="table table-hover">
-		    <thead>
-		      <tr>
-		        <th>Place</th>
-						<th>Name</th>
-		        <th>Quantity Added</th>
-						<th>Quantity Sold</th>
-		        <th>Date</th>
-		      </tr>
-		    </thead>
-		    <tbody>
-		      <tr ng-repeat="addQty in addedItem track by $index">
-		        <td>{{addQty.fromPlace}}</td>
-						<td>{{addQty.name}}</td>
-		        <td>{{addQty.qtyAdded}}</td>
-						<td>{{addQty.qtySold}}</td>
-		        <td>{{addQty.manfDate}}</td>
-		      </tr>
-		    </tbody>
-		  </table>
-	</div>
+<div class="cont products-history-wrapper">
+    <h1 class="products-history-heading col-xs-12"> Product : {{pro.pName}}  </h1>
+    <div class="col-xs-12 dCont">
+        <p class="product-id clearfix"><span class="col-xs-2">Id</span><span class="col-xs-10">: {{pro._id}}</span></p>
+<!--        <p class="clearfix"><span class="col-xs-4">Product Name</span><span class="col-xs-8">: {{pro.pName}}</span></p>-->
+        <h4 class="product-history-text col-xs-12">Product History</h4>
+        <table class="table table-striped table-bordered table-hover">
+            <thead class="thead-dark">
+              <tr>
+                <th>Place</th>
+                <th>Name</th>
+                <th>Quantity Added</th>
+                <th>Quantity Sold</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="addQty in addedItem track by $index">
+                <td>{{addQty.fromPlace}}</td>
+                <td>{{addQty.name}}</td>
+                <td>{{addQty.qtyAdded}}</td>
+                <td>{{addQty.qtySold}}</td>
+                <td>{{addQty.manfDate}}</td>
+              </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
