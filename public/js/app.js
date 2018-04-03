@@ -8,7 +8,6 @@ var routeTo = decodeURIComponent(location.href.split("route=")[1]);
 console.log(routeTo)
 $location.path(routeTo);
 
-
 })();
 
 

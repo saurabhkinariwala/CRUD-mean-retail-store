@@ -35,6 +35,18 @@ router.post('/updateQty', function(req, res){
   });
 });
 
+router.post('/updatePdt', function(req, res){
+    database.db.productsDetail.findAndModify({
+        query: {'_id': database.ObjectId(req.body.pdtId)},
+        update: {
+            $set: {"pName" : req.body.pdtName, "price" : req.body.price}
+        },
+        new: true
+    }, function (err, docs){
+        res.json(docs);
+    });
+});
+
 router.get('/getProductsById', function (req, res) {
     console.log(req.query.id);
   database.db.productsDetail.findOne({'_id': database.ObjectId(req.query.id)}, function (err, docs) {
@@ -91,7 +103,7 @@ router.get('/filterOrder', function(req, res){
 });
 
 router.post('/updateOrderStatus', function (req, res) {
-  database.db.orderDetails.update({'_id': database.ObjectID(req.body.id)},
+  database.db.orderDetails.update({'_id': database.ObjectId(req.body.id)},
     {
       $set:{"status" :req.body.status, "prodDetails":req.body.prodArray},
     }, function (err, docs){

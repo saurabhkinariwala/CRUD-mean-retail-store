@@ -155,12 +155,18 @@ myModule.directive('editProduct',function (retailService) {
     restrict:'E',
     scope:{
       data:'=',
-      index:'='
+      prodcat:'='
     },
     templateUrl:'../views/editProduct.html',
     link:function (scope,element,attrs) {
-      scope.upd = function (id, obj, index) {
-        retailService.updatePdt(Id, obj, index);
+      scope.upd = function (obj) {
+        retailService.updatePdt(obj, function(response){
+            angular.forEach(scope.prodcat, function(value, key){
+              if(value['_id'] === obj.pdtId){
+                  scope.prodcat[key] = response;
+              }
+           });
+        });
       }
     }
   }

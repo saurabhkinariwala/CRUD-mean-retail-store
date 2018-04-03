@@ -188,10 +188,15 @@ serMod.service('retailService', function($http,$localStorage, $q){
     });
   };
 
-  this.updatePdt = function (id, object, index) {
-    var selectCat = Id.split("-")[0];
-    $localStorage.products.categories[selectCat][index]['pName'] = object.pName;
-    $localStorage.products.categories[selectCat][index]['price'] = object.price;
+  this.updatePdt = function (object, callback) {
+      
+      $http.post('/api/updatePdt', object).then(function successCallback(response){
+        callback(response.data);
+    });
+      
+//    var selectCat = Id.split("-")[0];
+//    $localStorage.products.categories[selectCat][index]['pName'] = object.pName;
+//    $localStorage.products.categories[selectCat][index]['price'] = object.price;
   }
 
   this.getTotalAmount= function(itemsArr){

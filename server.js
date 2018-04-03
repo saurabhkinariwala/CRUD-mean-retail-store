@@ -9,6 +9,7 @@ var passport = require('passport');
 var Strategy = require('passport-local').Strategy;
 
 
+
 app.use(require('express-session')({ 
     secret: 'keyboard cat', 
     resave: false, 
@@ -44,9 +45,19 @@ app.use('/api', tasks)
 
 app.get('*',
   function(req, res) {
-      console.log(req.url)
-   res.redirect('/index?route=' + req.url);
+  let url ;
+
+ if(req.url.indexOf("?route=") > -1)
+ {
+   let tmp = req.url.split("?")[1];
+    url = '/index?' + tmp;
+    console.log("req",req.url)
+ }
+   else
+    url = '/index?route=' + req.url;
+    res.redirect(url);
   });
+
 
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
