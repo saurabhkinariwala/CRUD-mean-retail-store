@@ -38,7 +38,7 @@
             <thead><td>Category</td><td>Pdt Name</td><td>Avl Qty</td><td>Qty</td><td>Price</td><td>Amt</td></thead>
             <tbody>
                 <tr>
-                  <td class="col-md-2"><select class="form-control" ng-blur="categoryBlur()" name="selectedCat" placeholder="select" id="Pdt" ng-options="opt for opt in options" ng-model="newProduct.cat"></select>
+                  <td class="col-md-2"><select class="form-control" ng-change="categoryBlur()" name="selectedCat" placeholder="select" id="Pdt" ng-options="opt.catname for opt in options" ng-model="newProduct.cat"></select>
                   <p ng-if="itemDetail.selectedCat.$error.required && itemDetail.selectedCat.$dirty">Select the category</p></td>
 
                   <td class="col-md-2"><input ng-model="newProduct.pName" ng-blur="inputBlur()" item-names="prodName" placeholder="Product Name" name="productName" id="search-product" typeahead="state for state in prodName" class="form-control" required/>
@@ -100,4 +100,8 @@
          </tbody>
 </table>
 </div>
+</div>
+
+<div class="loader-wrapper" ng-class="{hide: hideLoader}">
+  <div class="loader"></div>
 </div>

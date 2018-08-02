@@ -3,9 +3,11 @@ myModule.controller('pdtCtrl',['$scope', '$routeParams', 'retailService','$rootS
 		var limitToModel = 2, skipPdts = 3, prodCount = 0;
 		$scope.isShow = false;
 		$scope.loadMoreBtn = false;
-		fetchData.getProductsData(skipPdts, $routeParams._id).then(function(data) {
+		$scope.hideLoader = false;
+		fetchData.getProductsData($routeParams._id).then(function(data) {
 				$scope.prodCat = data;
-                                $scope.category = data[0].cat;
+				$scope.category = data[0].cat;
+				$scope.hideLoader = true;
 		});
 
 //		fetchData.prodCount($scope.category).then(function(data){

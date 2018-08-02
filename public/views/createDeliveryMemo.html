@@ -76,7 +76,6 @@
 				             <tr ng-repeat="deliverPdt in deliveryObj.deliveryDetails" class="newRow">
 				               <td>{{$index+1}}</td>
 				               <td>{{deliverPdt.pdtName.prodName}}</td>
-											 <td>{{deliverPdt.pdtName.balQty}}</td>
 				               <td>{{deliverPdt.sentQty}}</td>
                        <td>{{deliverPdt.bundles}}</td>
 				               <td><span id="dlteBtn" ng-click="deleteDeliveryItem($index)" class="glyphicon glyphicon-trash"></span></td>

@@ -88,7 +88,7 @@ myModule.directive('createDeliveryMemo',['retailService',function(retailService)
    
         scope.$watch('data', function(data) {
           if(scope.data){
-            scope.deliveryObj.orderNo = scope.data.billNo;
+            scope.deliveryObj.orderId = scope.data._id;
             scope.prodOptions=[];
             scope.sentProduct={};
             scope.sentProduct.pdtName={};
@@ -111,10 +111,16 @@ myModule.directive('createDeliveryMemo',['retailService',function(retailService)
 
         scope.addDeliveryItem = function(isValid){
           if(scope.sentProduct.orderQty >= scope.sentProduct.sentQty && isValid){
-          scope.deliveryObj.deliveryDetails.push(scope.sentProduct);
-          scope.deliveryForm.$setPristine();
-          scope.sentProduct={};
-          scope.sentProduct.pdtName = scope.prodOptions[0];
+            if(typeof scope.deliveryObj === 'undefined'){
+              scope.deliveryObj = {};
+              scope.deliveryObj.orderId = scope.data._id;
+              scope.deliveryObj.deliveryDetails = [];
+            }
+            scope.deliveryObj.deliveryDetails.push(scope.sentProduct);
+            scope.deliveryForm.$setPristine();
+            scope.sentProduct={};
+            scope.sentProduct.pdtName = scope.prodOptions[0];
+            
           } else {
             alert('Sent qty should be less than order qty');
           }
@@ -141,7 +147,6 @@ myModule.directive('createDeliveryMemo',['retailService',function(retailService)
 
         scope.createDeliveryMemo = function(){
           retailService.createDeliveryMemo(scope.deliveryObj);
-          retailService.updateBalanceQty(scope.deliveryObj);
           scope.deliveryObj={};
         }
     });

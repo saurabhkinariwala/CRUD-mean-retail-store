@@ -18,12 +18,12 @@ serMod.service('fetchData',function($http,$q){
       return q.promise;
     }
 
-    this.getProductsData = function(skipPdts, routeparam){
+    this.getProductsData = function(routeparam){
       var q = $q.defer();
       $http({
       method: 'GET',
       url: '/api/getProductsData',
-      params: {skipPdts: skipPdts, routeparam: routeparam}
+      params: {routeparam: routeparam}
       }).then(function successCallback(response) {
         q.resolve(response.data)
       }, function errorCallback(err) {
@@ -145,6 +145,20 @@ serMod.service('retailService', function($http,$localStorage, $q){
     return q.promise;
   };
 
+  this.findOrderById = function (id) {
+    var q = $q.defer();
+    $http({
+    method: 'GET',
+    url: '/api/findOrderById',
+    params: { orderId: id }
+    }).then(function successCallback(response) {
+      q.resolve(response.data)
+    }, function errorCallback(error) {
+      q.reject(error);
+    });
+    return q.promise;
+  };
+
 	this.addProduct = function(obj){
     $http.post('/api/addProduct',obj);
 	}
@@ -161,13 +175,12 @@ serMod.service('retailService', function($http,$localStorage, $q){
     var q = $q.defer();
     $http({
     method: 'GET',
-    url: '/api/getCatData',
+    url: '/api/getProductsData',
     params: {routeparam: selectedCat}
     }).then(function successCallback(response) {
       var catProducts = response.data, prodNames=[];
           angular.forEach(catProducts, function(value, key) {
-            prodNames.push({"key":catProducts[key]['id'],"value":catProducts[key]['pName']});
-            // prodNames.push({"key":catProducts[key]['_id'],"value":catProducts[key]['pName']});
+            prodNames.push({"key":catProducts[key]['_id'],"value":catProducts[key]['pName']});
           });
 
       q.resolve(prodNames);
@@ -193,10 +206,6 @@ serMod.service('retailService', function($http,$localStorage, $q){
       $http.post('/api/updatePdt', object).then(function successCallback(response){
         callback(response.data);
     });
-      
-//    var selectCat = Id.split("-")[0];
-//    $localStorage.products.categories[selectCat][index]['pName'] = object.pName;
-//    $localStorage.products.categories[selectCat][index]['price'] = object.price;
   }
 
   this.getTotalAmount= function(itemsArr){
@@ -211,12 +220,8 @@ serMod.service('retailService', function($http,$localStorage, $q){
     $http.post('/api/saveOrder', orderObj);
   }
 
-  this.updateProductsQty = function(billObj){
-    $http.post('/api/updateProductsQty', billObj);
-  }
-
-  this.deleteItem = function (orderObj) {
-    $http.post('/api/deleteItem',orderObj).then(function(data) {
+  this.deleteItem = function (orderId) {
+    $http.post('/api/deleteItem',{id: orderId}).then(function(data) {
       console.log(data);
     });
   }
@@ -231,28 +236,12 @@ serMod.service('retailService', function($http,$localStorage, $q){
     $http.post('/api/createDeliveryMemo', deliveryObj)
   }
 
-  this.updateBalanceQty = function (deliveryObj){
-    var q = $q.defer();
-    $http({
-    method: 'GET',
-    url: '/api/updateOrder',
-    params: deliveryObj
-    }).then(function successCallback(response) {
-      q.resolve(response);
-
-    }, function errorCallback(err) {
-      q.reject(err)
-    });
-    return q.promise;
-  }
-
-
   this.getDeliveryData =function (selectedOrder){
     var q = $q.defer();
     $http({
     method: 'GET',
     url: '/api/getDeliveryData',
-    params: {orderNo: selectedOrder}
+    params: {orderId: selectedOrder}
     }).then(function successCallback(response) {
       q.resolve(response);
 

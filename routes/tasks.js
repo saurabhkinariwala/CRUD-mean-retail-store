@@ -20,6 +20,20 @@ router.get('/getProductsCategory', function (req, res){
   });
 });
 
+router.post('/saveOrder', function (req, res){
+  database.db.orderDetails.insert(req.body, function (err, doc){
+    res.json(doc);
+    doc.prodDetails.forEach(function (doc1) {
+      database.db.productsDetail.update({_id:database.ObjectId(doc1.id)},
+      {
+        $inc:{"qty": parseInt("-"+doc1.dmndQty)},
+        $push:{"addedItem":{"name":doc.name, "qtySold":doc1.dmndQty, "manfDate":doc.billDate, "fromPlace":doc.address}}
+      }, function (err, docs) {
+      })
+    });
+  });
+});
+
 
 
 router.post('/updateQty', function(req, res){
@@ -48,7 +62,6 @@ router.post('/updatePdt', function(req, res){
 });
 
 router.get('/getProductsById', function (req, res) {
-    console.log(req.query.id);
   database.db.productsDetail.findOne({'_id': database.ObjectId(req.query.id)}, function (err, docs) {
     res.json(docs);
   });
@@ -94,7 +107,6 @@ router.get('/getProdCount', function (req,res) {
 
 router.get('/filterOrder', function(req, res){
   database.db.orderDetails.createIndex({status: "text", name:"text", billNo:"number"}, function(){
-    console.log(Number(req.query.orderText));
     database.db.orderDetails.find({$text: {$search:req.query.orderText }}, function (err, docs) {
       res.json(docs);
     });
@@ -108,16 +120,13 @@ router.post('/updateOrderStatus', function (req, res) {
       $set:{"status" :req.body.status, "prodDetails":req.body.prodArray},
     }, function (err, docs){
       res.json(docs);
-      console.log(docs);
   });
 });
 
 
 
 router.get('/getDeliveryData', function (req, res) {
-  console.log(req.query.orderNo);
-  database.db.deliveryMemo.find({orderNo: parseInt(req.query.orderNo)}, function (err, docs) {
-    console.log(docs);
+  database.db.deliveryMemo.find({orderId: req.query.orderId}, function (err, docs) {
     res.json(docs);
   })
 });
@@ -125,64 +134,74 @@ router.get('/getDeliveryData', function (req, res) {
 router.post('/createDeliveryMemo', function (req, res){
   database.db.deliveryMemo.insert(req.body, function (err, doc){
     res.json(doc);
+    database.db.orderDetails.findOne({_id: database.ObjectId(doc.orderId)}, function (err, orderDoc) {
+      const prodDetails = orderDoc.prodDetails.map(function(orderPdt){
+        doc.deliveryDetails.forEach(function (pdtObj){
+          if(pdtObj.pdtName.id === orderPdt.id){
+            orderPdt.balQty -= pdtObj.sentQty;
+          }
+        }) 
+        return orderPdt;       
+      });
+      database.db.orderDetails.update({_id:database.ObjectId(doc.orderId)},
+      {
+        $set:{"prodDetails": prodDetails},              
+      }, function (err, docs) {
+        console.log(docs);
+      })
+    });
   });
 });
-
-router.get('/updateOrder', function (req, res){
-
-
-  //req.body.prodDetails.forEach(function(docs){
-database.db.deliveryMemo.find({orderNo: parseInt(req.query.orderNo)}, function (err, docs) {
-    console.log(docs);
-    res.json(docs);
-  });
-    
- // })
-});
-
 
 router.get('/getCustData', function (req, res) {
-  database.db.orderDetails.find(function (err, docs){
+  database.db.orderDetails.find(function (err, totalDocs){
+    let nonDeletedDocs = totalDocs.filter(function (obj) {
+      return obj.isDelete === false;
+    });
+    const orderLists = {
+      totalDocs : totalDocs,
+      nonDeletedDocs : nonDeletedDocs
+    }
+    res.json(orderLists);
+  })
+});
+
+router.get('/findOrderById', function (req, res) {
+  database.db.orderDetails.findOne({_id:database.ObjectId(req.query.orderId)}, function (err, docs){
+    console.log('orderId', req.query.orderId);
     res.json(docs);
   })
 })
 
-router.post('/saveOrder', function (req, res){
-  database.db.orderDetails.insert(req.body, function (err, doc){
-    res.json(doc);
-  });
-});
-
-router.post('/updateProductsQty', function (req, res){
-  req.body.prodDetails.forEach(function (doc1) {
-    database.db.productsDetail.update({id:doc1.id},
-    {
-      $inc:{"qty": parseInt("-"+doc1.dmndQty)},
-      $push:{"addedItem":{"name":req.body.name, "qtySold":doc1.dmndQty, "manfDate":req.body.billDate, "fromPlace":req.body.address}}
-    }, function (err, docs) {
-      console.log(docs);
-    })
-  })
-
-});
-
 router.post('/addProduct', function (req, res) {
     req.body.cat_id = database.ObjectId(req.body.cat_id);
   database.db.productsDetail.insert(req.body, function (err, doc){
-      console.log(doc);
     res.json(doc);
   });
 });
 
 
 router.post('/deleteItem', function (req, res) {
-  database.db.orderDetails.remove({"billNo":req.body.billNo}, function (err, doc){
+  database.db.orderDetails.update({"_id":database.ObjectId(req.body.id)}, 
+  {
+    $set : {isDelete: true}
+  }, 
+  function (err, doc){
     res.send(doc);
   });
 });
 
+// router.post('/deleteProduct', function (req, res) {
+//   database.db.productsDetail.remove({"_id": database.ObjectId(req.body.id)}, function (err, doc){
+//     res.send(doc);
+//   });
+// });
+
 router.post('/deleteProduct', function (req, res) {
-  database.db.productsDetail.remove({"_id": database.ObjectId(req.body.id)}, function (err, doc){
+  database.db.productsDetail.update({"_id": database.ObjectId(req.body.id)}, 
+    {
+      $set: {isDelete: true}
+    }, function (err, doc){
     res.send(doc);
   });
 });
