@@ -5,7 +5,7 @@
     </div>
       <div class="form-group bill-date-wrapper col-xs-6">
 	<label for="date" class="control-label date-label">Date :</label>
-            <input id="date" name="billDdate" class="form-control datepicker bill-date" ng-model="custObj.billDate" data-date-format="mm/dd/yyyy" >
+            <input id="date" name="billDdate" type="date" class="form-control bill-date" ng-model="custObj.billDate" >
             <p ng-show="userDetails.billDdate.$error.required && userDetails.billDdate.$dirty">Order Date is required.</p>    
       </div>
     <form class="form-inline form-wrapper well col-xs-12 col-sm-12" name="userDetails" novalidate>

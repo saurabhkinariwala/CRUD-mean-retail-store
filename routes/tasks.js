@@ -125,7 +125,8 @@ router.get('/filterOrder', function(req, res){
                       {billNo: parseInt(req.query.orderText)}
                     ]
             },
-            {isDelete: false}
+            {isDelete: false},
+            {billDate: {$gte: req.query.fromDate, $lt: req.query.toDate}}
           ]
         }, function(err, docs){
   

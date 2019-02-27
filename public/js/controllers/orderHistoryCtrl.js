@@ -11,32 +11,37 @@ myModule.controller('orderHistoryCtrl',['$scope', '$routeParams', 'retailService
 	$scope.exportAsPdf = function(order){
 		console.log(order);
 		$scope.orderData = order;
-		var pdf = new jsPDF('p', 'pt', 'letter');
-		source = document.getElementById('downloadOrder');
-		
-		margins = {
-		  top: 80,
-		  bottom: 60,
-		  left: 40,
-		  width: 522
-		};
-		//pdf.rect(150,100,10,10);
-		pdf.fromHTML(
-		source, 
-		margins.left, 
-		margins.top, { 
-		 'width': margins.width
-		  
-		},
-  
-		function (dispose) {
-		 pdf.save('Test.pdf');
-		}, margins);
+		document.getElementById('downloadOrder').style.display = 'block';
+		setTimeout(function(){
+			var pdf = new jsPDF('p', 'pt', 'letter');
+			source = document.getElementById('downloadOrder');
+			
+			margins = {
+			top: 80,
+			bottom: 60,
+			left: 40,
+			width: 522
+			};
+			//pdf.rect(150,100,10,10);
+			pdf.fromHTML(
+			source, 
+			margins.left, 
+			margins.top, { 
+			'width': margins.width
+			
+			},
+	
+			function (dispose) {
+			pdf.save( order.name + '.pdf');
+			document.getElementById('downloadOrder').style.display = 'none';
+			}, margins);
+		}, 0)
+			
 	}
 
-	$scope.searchOrder =function (item) {
-
-			fetchData.filterOrder(item).then(function (data) {
+	$scope.searchOrder =function (item, fromDate, toDate) {
+			fetchData.filterOrder(item, new Date(fromDate), new Date(toDate)).then(function (data) {
+				
 				$scope.orderList = data;
 				// if(!item){
 				// 	fetchData.getOnLoadData(skipPdts, $routeParams.cat).then(function(data) {
@@ -54,6 +59,7 @@ myModule.controller('orderHistoryCtrl',['$scope', '$routeParams', 'retailService
 
 			});
 	}
+
 
 	$scope.openCreateDeliveryMemo = function (orderDetails){
 		retailService.findOrderById(orderDetails._id).then(function(data){

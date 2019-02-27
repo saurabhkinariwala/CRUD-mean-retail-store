@@ -84,12 +84,16 @@ serMod.service('fetchData',function($http,$q){
         return q.promise;
     }
 
-    this.filterOrder = function (orderText) {
+    this.filterOrder = function (orderText, fromDate, toDate) {
       var q = $q.defer();
       $http({
         url: '/api/filterOrder',
         method: "GET",
-        params: {orderText: orderText}
+        params: {
+                  orderText: orderText,
+                  fromDate: fromDate, 
+                  toDate: toDate
+                }
      }).then(function (response) {
         q.resolve(response.data);
       },function(error){
