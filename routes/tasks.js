@@ -105,12 +105,32 @@ router.get('/getProdCount', function (req,res) {
 });
 
 
+// router.get('/filterOrder', function(req, res){
+//   database.db.orderDetails.createIndex({status: "text", name:"text", billNo:"number"}, function(){
+//     database.db.orderDetails.find({$text: {$search:req.query.orderText }}, function (err, docs) {
+//       res.json(docs);
+//     });
+//   })
+
+// });
+
 router.get('/filterOrder', function(req, res){
-  database.db.orderDetails.createIndex({status: "text", name:"text", billNo:"number"}, function(){
-    database.db.orderDetails.find({$text: {$search:req.query.orderText }}, function (err, docs) {
+
+  database.db.orderDetails.find({
+    $and : [
+            {
+              $or : [
+                      {status: {$regex: req.query.orderText, $options: "$i"}},
+                      {name: {$regex: req.query.orderText, $options: "$i"}}, 
+                      {billNo: parseInt(req.query.orderText)}
+                    ]
+            },
+            {isDelete: false}
+          ]
+        }, function(err, docs){
+  
       res.json(docs);
-    });
-  })
+  });
 
 });
 

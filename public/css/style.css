@@ -362,6 +362,24 @@ table .thead-dark th{
     z-index: 100;
 }
 
+.order-history-wrapper .product-search{
+    margin-top: 20px; 
+}
+
+.form-check-input{
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+}
+
+.order-history-wrapper .search-name{
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid grey;
+    background: #0059ad;
+    color: white;
+}
+
 .delivery-memo-wrapper{
 	padding: 10px;
 	background: #f3f3f3;

@@ -74,6 +74,19 @@ myModule.directive('deliveryMemo',['retailService',function(retailService) {
   }
 }]);
 
+myModule.directive('downloadOrder', ['retailService', function(retailService) {
+  return{
+    restrict: 'E',
+    scope:{
+      data: '='
+    },
+    templateUrl: '../views/downloadOrder.html',
+    link: function(scope, element, attrs){
+      console.log("Inside directive: " + scope.data);
+    }
+  }
+}])
+
 myModule.directive('createDeliveryMemo',['retailService',function(retailService) {
   return{
     restrict:'E',
