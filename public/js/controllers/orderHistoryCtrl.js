@@ -40,7 +40,14 @@ myModule.controller('orderHistoryCtrl',['$scope', '$routeParams', 'retailService
 	}
 
 	$scope.searchOrder =function (item, fromDate, toDate) {
-			fetchData.filterOrder(item, new Date(fromDate), new Date(toDate)).then(function (data) {
+		if(fromDate || toDate){
+			fromDate = new Date(fromDate);
+			toDate = new Date(toDate);
+		} else {
+			fromDate = undefined;
+			toDate = undefined; 
+		}
+			fetchData.filterOrder(item, fromDate, toDate).then(function (data) {
 				
 				$scope.orderList = data;
 				// if(!item){

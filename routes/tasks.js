@@ -115,25 +115,34 @@ router.get('/getProdCount', function (req,res) {
 // });
 
 router.get('/filterOrder', function(req, res){
+  var orderTextQuery = req.query.orderText,
+    dateQuery = req.query.fromDate || req.query.toDate,
+    query = {};
+    query['$and']=[];
 
-  database.db.orderDetails.find({
-    $and : [
-            {
-              $or : [
-                      {status: {$regex: req.query.orderText, $options: "$i"}},
-                      {name: {$regex: req.query.orderText, $options: "$i"}}, 
-                      {billNo: parseInt(req.query.orderText)}
-                    ]
-            },
-            {isDelete: false},
-            {billDate: {$gte: req.query.fromDate, $lt: req.query.toDate}}
-          ]
-        }, function(err, docs){
+  if (orderTextQuery) {
+    query['$and'].push({'$or': [{status: {$regex: req.query.orderText, $options: "$i"}},
+    {name: {$regex: req.query.orderText, $options: "$i"}}, 
+    {billNo: parseInt(req.query.orderText)}]})
+  }
   
-      res.json(docs);
-  });
+  if (dateQuery) {
+    query['$and'].push({billDate: {$gte: new Date(req.query.fromDate).toISOString(), $lt: new Date(req.query.toDate).toISOString()}});
+  }
+
+  if(!orderTextQuery && !dateQuery) {
+    query['$and'].push({isDelete: false});
+  }
+
+  query['$and'].push({isDelete: false});
+  
+    database.db.orderDetails.find(query, function(err, docs){
+      console.log(query);
+        res.json(docs);
+    });
 
 });
+
 
 router.post('/updateOrderStatus', function (req, res) {
   database.db.orderDetails.update({'_id': database.ObjectId(req.body.id)},
@@ -234,3 +243,59 @@ module.exports = (function(db){
     return router;
 } )();
         
+
+
+
+
+
+// router.get('/filterOrder', function(req, res){
+//   var orderTextQuery = req.query.orderText,
+//     dateQuery = req.query.fromDate || req.query.toDate,
+//     query = {};
+//     query['$or']=[];
+
+//   if (orderTextQuery) {
+//     query["$or"].push({status: {$regex: req.query.orderText, $options: "$i"}},
+//                    {name: {$regex: req.query.orderText, $options: "$i"}}, 
+//                    {billNo: parseInt(req.query.orderText)})
+//   }
+  
+//   if (dateQuery) {
+//     query.billDate = {$gte: new Date(req.query.fromDate).toISOString(), $lt: new Date(req.query.toDate).toISOString()}
+//   }
+
+//   if(!orderTextQuery && !dateQuery) {
+//     query = {};
+//   }
+
+//   query.isDelete = false;
+  
+//     database.db.orderDetails.find(query, function(err, docs){
+//       console.log(query);
+//         res.json(docs);
+//     });
+
+// });
+
+// function getQuery(orFields, fromDate, toDate){
+//   var query = {};
+  
+//   if(typeof orFields !== 'undefined' ) {
+    
+
+//   }
+//   return query = {
+//     $and : [
+//             {
+//               $or : [
+//                       {status: {$regex: req.query.orderText, $options: "$i"}},
+//                       {name: {$regex: req.query.orderText, $options: "$i"}}, 
+//                       {billNo: parseInt(req.query.orderText)}
+//                     ]
+//             },
+//             {isDelete: false},
+//             {billDate: {$gte: new Date(req.query.fromDate).toISOString(), $lt: new Date(req.query.toDate).toISOString()}}
+//           ]
+//         };
+
+// }

@@ -14,9 +14,9 @@
                   <div class="form-group bill-date-wrapper product-search col-sm-5 col-xs-6">
                         <!-- <input type="checkbox" class="form-check-input" mg-model="enableSearchByDate"> -->
                         <label for="fromDate" class="control-label date-label">From :</label>
-                        <input id="fromDate" name="from-date" class="form-control from-date" type="date" ng-model="fromSearchDate" data-date-format="mm/dd/yyyy" >
+                        <input id="fromDate" name="from-date" class="form-control from-date" type="date" ng-model="fromSearchDate" >
                         <label for="toDate" class="control-label date-label">To :</label>
-                        <input id="toDate" name="to-date" class="form-control to-date" type="date" ng-model="toSearchDate" data-date-format="mm/dd/yyyy" >
+                        <input id="toDate" name="to-date" class="form-control to-date" type="date" ng-model="toSearchDate">
                         <button class="search-name" ng-click="searchOrder(searchOrderText, fromSearchDate, toSearchDate)">OK</button>
                   </div>
 		</div>
@@ -28,7 +28,7 @@
             <div class="order-datails-wrapper col-xs-12">
                 <div class="col-md-4 col-xs-12">
                   <p class="order-details order-no">Order No : {{order.billNo}}</p>
-                  <p class="order-details order-date">Order Date : {{order.billDate}}</p> 
+                  <p class="order-details order-date">Order Date : {{order.billDate | formatDate}}</p> 
                 </div>
 
                 <div class="col-md-4 col-xs-12">

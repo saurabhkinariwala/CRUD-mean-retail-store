@@ -89,6 +89,7 @@ myModule.controller('billingCtrl',['$scope','retailService','fetchData',function
     $scope.submitBill = function(){
 					$scope.custObj.status = "Pending";
 					$scope.custObj.isDelete = false;
+					$scope.custObj.billDate = new Date($scope.custObj.billDate);
 					retailService.findAndPushOrder($scope.custObj);
 					$scope.custObj ={};
 					$scope.custObj.prodDetails = [];

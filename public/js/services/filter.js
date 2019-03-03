@@ -7,6 +7,13 @@ filtr.filter('rupeeFilter',function(){
 	}
 })
 
+filtr.filter('formatDate', function(){
+	return function(date){
+		let d = new Date(date)
+		return `${d.getDate()}-${d.getMonth() + 1}-${d.getFullYear()}`;
+	}
+})
+
 	filtr.filter('greaterThan',function () {
 		return function(obj,item) {
 			if(obj !== undefined){
