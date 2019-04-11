@@ -40,21 +40,7 @@ myModule.directive('orderDetails',['retailService',function(retailService){
     templateUrl:'../views/orderDetails.html',
     link:function(scope,element,attrs){
       scope.updStatus = function(){
-        var prods = scope.data.prodDetails.length,
-            flag = 0;
-        angular.forEach(scope.data.prodDetails, function (value, key) {
-          (value.delvStatus) ? flag++ : null;
-        })
-        if(prods === flag) {
-          retailService.updateOrderStatus({id: scope.data._id, status: 'Completed', prodArray: scope.data.prodDetails},function(obj){
-            scope.data.status = obj;
-          } );
-        } else {
-          retailService.updateOrderStatus({id: scope.data._id, status: 'Pending', prodArray: scope.data.prodDetails}, function(obj){
-            scope.data.status = obj;
-
-          } );
-        }
+    
       }
     }
   }
@@ -87,21 +73,49 @@ myModule.directive('downloadOrder', ['retailService', function(retailService) {
   }
 }])
 
+myModule.directive('makePayment', ['retailService', function(retailService) {
+  return{
+    restrict: 'E',
+    scope:{
+      data: '=',
+      orderList: '=',
+      index: '='
+    },
+    templateUrl: '../views/makePayment.html',
+    link: function(scope, element, attrs){
+      scope.submitPayment = function(id, paymentObj){
+        retailService.addPayment(id, paymentObj).then(function(res){
+          scope.orderList[scope.index] = res.data;
+        }, function(){});
+      }
+    }
+  }
+}])
+
 myModule.directive('createDeliveryMemo',['retailService',function(retailService) {
   return{
     restrict:'E',
     scope:{
-      data: '=data'
+      data: '=data',
+      orderList: '=orderList',
+      index: '=index'
     },
     templateUrl:'../views/createDeliveryMemo.html',
     link:function(scope,element,attrs){
+        var deliveryNumber;
         scope.deliveryObj = {};
-        scope.deliveryObj.deliveryDetails = [];
+        // scope.deliveryObj.deliveryDetails = [];
         scope.editDeliveryBtn = false;
    
         scope.$watch('data', function(data) {
           if(scope.data){
-            scope.deliveryObj.orderId = scope.data._id;
+            retailService.getDeliveryData().then(function(res) {
+                deliveryNumber = deliveryNumber || 0;
+                deliveryNumber = res.data.length + 1;
+                scope.deliveryObj.deliveryNumber = deliveryNumber;
+              
+            })
+            // scope.deliveryObj.orderId = scope.data._id;
             scope.prodOptions=[];
             scope.sentProduct={};
             scope.sentProduct.pdtName={};
@@ -123,9 +137,8 @@ myModule.directive('createDeliveryMemo',['retailService',function(retailService)
         }
 
         scope.addDeliveryItem = function(isValid){
-          if(scope.sentProduct.orderQty >= scope.sentProduct.sentQty && isValid){
-            if(typeof scope.deliveryObj === 'undefined'){
-              scope.deliveryObj = {};
+          if(scope.sentProduct.balQty >= scope.sentProduct.sentQty && isValid){
+            if(typeof scope.deliveryObj.deliveryDetails === 'undefined'){
               scope.deliveryObj.orderId = scope.data._id;
               scope.deliveryObj.deliveryDetails = [];
             }
@@ -135,7 +148,7 @@ myModule.directive('createDeliveryMemo',['retailService',function(retailService)
             scope.sentProduct.pdtName = scope.prodOptions[0];
             
           } else {
-            alert('Sent qty should be less than order qty');
+            alert('Sent qty should be less than bal qty');
           }
         }
 
@@ -159,11 +172,14 @@ myModule.directive('createDeliveryMemo',['retailService',function(retailService)
         }
 
         scope.createDeliveryMemo = function(){
-          retailService.createDeliveryMemo(scope.deliveryObj);
-          scope.deliveryObj={};
+          retailService.createDeliveryMemo(scope.deliveryObj).then(function(res){
+            scope.data = res.data;
+            scope.orderList[scope.index] = res.data;
+            ++deliveryNumber;
+            scope.deliveryObj={};
+          });
         }
-    });
-      
+      });
     }
   }
 }]);

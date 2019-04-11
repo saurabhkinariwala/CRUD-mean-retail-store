@@ -23,8 +23,15 @@
 	</div>
 	<div class="clearfix">            
 	<!-- <div class="col-xs-12 dCont" ng-repeat="order in orderList | orderBy:'-billNo' | filter:{name:searchName} | filter:{billNo:searchOrder} | filter:{status:searchStatus}"> -->
-	<div class="col-xs-12 dCont" ng-hide="orderList.length===0" ng-repeat="order in orderList | orderBy:'-billNo'">
-            <span class="glyphicon glyphicon-trash delete-order" ng-click="deleteOrder(order)"></span>
+	<div class="col-xs-12 dCont" ng-hide="orderList.length===0" ng-repeat="order in orderList | orderBy:'-billNo'" ng-class="{green: order.delvStatus==='Completed' && order.balance === 0}">
+            <div class="order-icons-wrapper">
+                  <a href="/Billing/{{order._id}}" ng-click="editOrder(order)" class="order-icons">
+                        <span class="glyphicon glyphicon-edit" ng-show="order.delvStatus==='Pending'"></span>
+                  </a>
+                  <span class="glyphicon glyphicon-download-alt order-icons" ng-click="exportAsPdf(order)"></span>
+                  <span class="glyphicon glyphicon-trash order-icons" ng-show="order.delvStatus==='Pending'" ng-click="deleteOrder(order)"></span>
+            </div>
+
             <div class="order-datails-wrapper col-xs-12">
                 <div class="col-md-4 col-xs-12">
                   <p class="order-details order-no">Order No : {{order.billNo}}</p>
@@ -38,25 +45,25 @@
                 </div>
 
                 <div class="col-md-4 col-xs-12">
-                  <p class="order-details order-price">Order Amount : {{order.total}}</p>
-                  <p class="order-details order-status price">Order Status : {{order.status}}</p>
+                  <p class="order-details order-price">Order Amount : {{order.total | rupeeFilter}}</p>
+                  <p class="order-details order-status price">Balance : {{order.balance | rupeeFilter}}</p>
                 </div>
             </div>            
 	<div class="col-xs-12 col-md-8 order-buttons-wrapper">
             <div class="show-details-btn-wrapper col-xs-6 col-sm-2">
 		<button class="show-details" ng-click="showOrder(order)" data-toggle="modal" data-target="#orderModal">Show Details</button>
             </div>
-            <div class="edit-order-btn-wrapper col-xs-6 col-sm-2">
-		<a href="#Billing" class="btn edit-order">Edit Order</a>
-            </div>
+            <!-- <div class="edit-order-btn-wrapper col-xs-6 col-sm-2">
+		<a href="#Billing" ng-show="order.delvStatus==='Pending'" class="btn edit-order">Edit Order</a>
+            </div> -->
             <div class="deliver-memo-btn-wrapper col-xs-6 col-sm-2">
 		<button class="deliver-memo" ng-click="showDeliveryMemo(order)" data-toggle="modal" data-target="#showDeliveryDetails">Deliver Memo</button>
             </div>
-            <div class="create-delivery-memo-btn-wrapper col-xs-6 col-sm-2">
-		<button class="create-delivery-memo" ng-click="openCreateDeliveryMemo(order)" data-toggle="modal" data-target="#createDeliveryMemo">Create DM</button>
+            <div class="create-delivery-memo-btn-wrapper col-xs-6 col-sm-2" ng-if="order.delvStatus==='Pending'">
+		<button class="create-delivery-memo" ng-click="openDeliveryMemoOrPayment(order, $index)" data-toggle="modal" data-target="#createDeliveryMemo">Create DM</button>
             </div>
-            <div class="create-delivery-memo-btn-wrapper col-xs-6 col-sm-2">
-            <button class="create-delivery-memo" ng-click="exportAsPdf(order)">Download</button>
+            <div class="make-payment-wrapper col-xs-6 col-sm-3">
+            <button class="make-payment" ng-click="openDeliveryMemoOrPayment(order, $index)" data-toggle="modal" data-target="#makePayment">Make Payment</button>
             </div>
 	</div>
         
@@ -73,6 +80,7 @@
 </div>
 
 <order-details data="orderData"></order-details>
-<create-delivery-memo data="deliveryDetails"></create-delivery-memo>
+<create-delivery-memo data="orderData" order-list="orderList" index="index"></create-delivery-memo>
 <delivery-memo data="deliveryData" orderdetails="orderDetail"></delivery-memo>
+<make-payment data="orderData" order-list="orderList" index="index"></make-payment>
 <download-order data="orderData"></download-order>

@@ -2,7 +2,7 @@ var filtr = angular.module('filterModule',['serviceModule']);
 
 filtr.filter('rupeeFilter',function(){
 	return function(obj){
-		var r = 'Rs '+obj;
+		var r = 'Rs '+obj +'/-';
 		return r;
 	}
 })

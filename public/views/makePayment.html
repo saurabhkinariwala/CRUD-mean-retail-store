@@ -1,0 +1,45 @@
+<div class="modal fade" id="makePayment" tabindex="-1" role="dialog" aria-labelledby="makePaymentLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h2 class="modal-title" id="myModalLabel">Make Balance payment</h2>
+            </div>
+
+            <div class="modal-body">
+                <form class="form-wrapper well"  name="orderPayment" novalidate>					
+                    <div class="form-group">
+                        <h4 class="order-heading">Order No: {{data.billNo}}</h4>
+                        <h4 class="order-heading">Balance: {{data.balance | rupeeFilter}}</h4>
+                    </div>
+                    <div class="row order-wrapper">
+                        <p class="pull-left col-xs-12 col-sm-6 order-desc"> Name: {{data.name}}</p>
+                        <p class="pull-left col-xs-12 col-sm-6 order-desc"> Address: {{data.address}}</p>
+                        <p class="pull-left col-xs-12 col-sm-6 order-desc"> Order Date: {{data.billDate | formatDate}}</p>
+                    </div>
+                    <div class="form-group clear-fix">
+                        <label for="amount">Amount</label>
+                        <input type="number" class="form-control" id="amount" name="balAmount" ng-model="balancePayment.amount" required/>
+                        <p ng-show="orderPayment.balAmount.$error.required && orderPayment.balAmount.$dirty">Amount is required.</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="date">Date</label>
+                        <input id="date" class="form-control datepicker" name="paymentDate" data-date-format="mm/dd/yyyy" ng-model="balancePayment.paymentDate" required/>
+                        <p ng-show="orderPayment.paymentDate.$error.required && orderPayment.paymentDate.$dirty">Date is required.</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="mode">Mode</label>
+                        <input type="text" id="mode" class="form-control" name="mode" ng-model="balancePayment.mode" required/>
+                        <p ng-show="orderPayment.mode.$error.required && orderPayment.mode.$dirty">Mode is required.</p>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" ng-disabled="orderPayment.$invalid" ng-click="submitPayment(data._id, balancePayment)" data-dismiss="modal">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+      

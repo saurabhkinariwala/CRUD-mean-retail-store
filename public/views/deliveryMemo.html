@@ -9,12 +9,13 @@
         <div class="row order-wrapper">
           <p class="pull-left col-xs-12 col-sm-6 order-details"> Name: {{orderdetail.name}}</p>
           <p class="pull-left col-xs-12 col-sm-6 order-details"> Address: {{orderdetail.address}}</p>
-          <p class="pull-left col-xs-12 col-sm-6 order-details"> Date: {{orderdetail.billDate}}</p>
+          <p class="pull-left col-xs-12 col-sm-6 order-details"> Date: {{orderdetail.billDate | formatDate}}</p>
         </div>
         <div class="clearfix">
           <div class="delivery-memo-wrapper" ng-repeat="dm in deliverydata">
             <span class="glyphicon glyphicon-print print-dm" ng-click="printDm(dm)"></span>
             <p class="dm-details">Delivery Number : {{dm.deliveryNumber}}</p>
+            <p class="dm-details">L/R Number : {{dm.lrNumber}}</p>
             <p class="dm-details">Transport : {{dm.transport}}</p>
             <p class="dm-details">Delivery Date : {{dm.DeliveryDate}}</p>
             <table class="table table-bordered">
@@ -36,6 +37,7 @@
                </tbody>
             </table>
           </div>
+          <div class="delivery-memo-wrapper" ng-show="deliverydata.length === 0">None of the items for this order are delivered yet</div>
         </div>
       </div>
       <div class="modal-footer">

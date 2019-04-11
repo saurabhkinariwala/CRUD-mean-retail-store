@@ -25,6 +25,10 @@ app.config(function($locationProvider, $routeProvider){
         templateUrl:"views/orderHistory.html",
         controller:"orderHistoryCtrl"
     })
+    .when('/Billing/:id',{
+        templateUrl:"views/billing.html",
+        controller:"billingCtrl"
+    })
 
 
     .otherwise({redirectTo:'/home'});

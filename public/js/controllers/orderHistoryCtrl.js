@@ -3,13 +3,28 @@ myModule.controller('orderHistoryCtrl',['$scope', '$routeParams', 'retailService
 	fetchData.getCustData().then(function(data) {
 		$scope.orderList = data.nonDeletedDocs;
 		$scope.hideLoader = true;
+		$scope.orderData = {};
 	});
+
+
+
 	$scope.showOrder = function(order){
-		$scope.orderData = order;
+		fetchOrderById(order);
+	}
+
+	$scope.openDeliveryMemoOrPayment = function (orderDetails, index){
+		$scope.index = $scope.orderList.length - index - 1;
+		fetchOrderById(orderDetails);
+	}
+
+	function fetchOrderById(order){
+		retailService.findOrderById(order._id).then(function(data){
+			$scope.orderData = data;
+			// order = data;
+		})
 	}
 
 	$scope.exportAsPdf = function(order){
-		console.log(order);
 		$scope.orderData = order;
 		document.getElementById('downloadOrder').style.display = 'block';
 		setTimeout(function(){
@@ -68,26 +83,25 @@ myModule.controller('orderHistoryCtrl',['$scope', '$routeParams', 'retailService
 	}
 
 
-	$scope.openCreateDeliveryMemo = function (orderDetails){
-		retailService.findOrderById(orderDetails._id).then(function(data){
-			$scope.deliveryDetails = data;
-		})
-		
-
-	}
+	
 	$scope.showDeliveryMemo = function (orderDetails) {
 		console.log(orderDetails);
 		$scope.orderDetail = angular.copy(orderDetails);
 		$scope.deliveryData = {};
-		retailService.getDeliveryData(orderDetails._id).then(function (res) {
+		retailService.getDeliveryDataByOrder(orderDetails._id).then(function (res) {
 			$scope.deliveryData = res.data;
 			console.log($scope.deliveryData);
 			
 		});
 		$scope.deliveryDetail = orderDetails;
-		// $scope.deliveryData = [{"DeliveryNumber":2}];
 
 	}
+
+	$scope.editOrder = function(order){
+		retailService.setOrder(order);
+	}
+
+
 	$scope.deleteOrder = function (orderObj) {
 		var result = confirm("Want to delete?");
 		if (result) {

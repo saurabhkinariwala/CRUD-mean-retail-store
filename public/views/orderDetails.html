@@ -11,7 +11,7 @@
           <p class="pull-left col-xs-12 col-sm-6 order-details"> Address: {{data.address}}</p>
           <p class="pull-left col-xs-12 col-sm-6 order-details"> Email id: {{data.email}}</p>
           <p class="pull-left col-xs-12 col-sm-6 order-details"> Contact: {{data.contact}}</p>
-          <p class="pull-left col-xs-12 col-sm-6 order-details"> Date: {{data.billDate}}</p>
+          <p class="pull-left col-xs-12 col-sm-6 order-details"> Date: {{data.billDate | formatDate}}</p>
         </div>
         <div class="clearfix">
           <table class="table table-bordered">
@@ -20,6 +20,7 @@
                      <th class="col-xs-1"><span class="bold-font">Sr No</span></th>
                      <th class="col-xs-3"><span class="bold-font">Product Name</span></th>
                      <th class="col-xs-2"><span class="bold-font">Qty</span></th>
+                     <th class="col-xs-2"><span class="bold-font">Bal Qty</span></th>
                      <th class="col-xs-2"><span class="bold-font">Price</span></th>
                      <th class="col-xs-2"><span class="bold-font">Amount</span></th>
                      <th class="col-xs-2"><span class="bold-font">Status</span></th>
@@ -30,18 +31,51 @@
                    <td>{{$index+1}}</td>
                    <td>{{pdts.pName}}</td>
                    <td>{{pdts.dmndQty}}</td>
-                   <td>{{pdts.price}}</td>
-                   <td>{{pdts.amount}}</td>{{pdts.delvStatus}}
+                   <td>{{pdts.balQty}}</td>
+                   <td>{{pdts.price + '/-'}}</td>
+                   <td>{{pdts.amount + '/-'}}</td>{{pdts.delvStatus}}
                    <td class="align-center"><input type="checkbox" ng-model="pdts.delvStatus" ng-checked="pdts.delvStatus"/></td>
                  </tr>
                   <tr>
-                      <td colspan="3"></td>
+                      <td colspan="4"></td>
                       <td><span class="bold-font">Total</span></td>
-                      <td><span class="bold-font">{{data.total}}</span></td>
-                      <td><span class="bold-font">{{data.status}}</span></td>
+                      <td><span class="bold-font">{{data.total + '/-'}}</span></td>
+                      <td></td>
+                  </tr>
+                  <tr>
+                    <td colspan="4"></td>
+                    <td><span class="bold-font">Advance</span></td>
+                    <td><span class="bold-font">{{data.advance + '/-'}}</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td colspan="4"></td>
+                    <td><span class="bold-font">Balance</span></td>
+                    <td><span class="bold-font">{{data.balance + '/-'}}</span></td>
+                    <td><span class="bold-font">{{data.delvStatus}}</span></td>
                   </tr>
              </tbody>
           </table>
+        </div>
+        <div class="remarks">{{data.remark}}</div>
+        <div class="payment-history">
+          <h2>Payment History</h2>
+          <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">Amount</th>
+                  <th scope="col">Date</th>
+                  <th scope="col">Mode</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="payment in data.payments">
+                  <td>{{payment.amount | rupeeFilter}}</td>
+                  <td>{{payment.paymentDate}}</td>
+                  <td>{{payment.mode}}</td>
+                </tr>
+              </tbody>
+            </table>
         </div>
       </div>
       <div class="modal-footer">

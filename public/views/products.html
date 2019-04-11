@@ -21,6 +21,10 @@
 	<div class="clearfix" ng-hide="isShow">
             <!-- <div class="col-xs-12 dCont" ng-repeat="pdt in prodCat | limitTo:limitToModel | greaterThan:searchQty"> -->
             <div class="col-xs-12 dCont" ng-repeat="pdt in prodCat">
+                <div class="product-icons-wrapper">
+                    <span class="glyphicon glyphicon-edit product-icons" ng-click="addQtyOrEditPdt(pdt._id, pdt.pName, pdt.price)" data-toggle="modal" data-target="#editModal"></span>
+                    <span class="glyphicon glyphicon-trash product-icons" ng-click="deleteProduct(pdt._id)"></span>
+                </div>
                 <img ng-src="{{pdt.image}}" alt="image" class="col-xs-12 col-sm-4 col-md-5 prod-image"/>
                 <div class="products-detail-wrapper col-xs-12 col-sm-8 col-md-6">
                         <p class="pdt-name col-xs-12">{{pdt.pName}}</p>
@@ -30,9 +34,6 @@
                 </div>
 
                 <div class="col-xs-12 col-sm-8 col-md-7 buttons-wrapper">
-                    <div class="edit-pdt-btn-wrapper col-xs-6 col-md-3">
-                        <button class="edit-pdt" ng-click="addQtyOrEditPdt(pdt._id, pdt.pName, pdt.price)" data-toggle="modal" data-target="#editModal">Edit Product</button>
-                    </div>
 
                     <div class="add-qty-btn-wrapper col-xs-6 col-md-3">
                         <button class="add-qty" ng-click="addQtyOrEditPdt(pdt._id, pdt.pName)" data-toggle="modal" data-target="#myModal">Add Quantity</button>
@@ -40,10 +41,6 @@
 
                     <div class="pdt-hstry-btn-wrapper col-xs-6 col-md-3">
                         <a class="btn pdt-hstry" href="#Pdthstry/{{pdt._id}}">Product history</a>
-                    </div>
-
-                    <div class="del-pdt-btn-wrapper col-xs-6 col-md-3">
-                        <button class="del-pdt" ng-click="deleteProduct(pdt._id)">Delete Item</button>
                     </div>                                                      
                         
                 </div>

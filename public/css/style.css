@@ -30,6 +30,13 @@ html,body{
 	clear: both;
 }
 
+.green{
+    background: palegreen !important;
+}
+.red{
+    background: palegoldenrod !important;
+}
+
 .loader-wrapper{
     position: fixed;
     top: 0;
@@ -247,7 +254,7 @@ table .thead-dark th{
 }
 .dCont .edit-pdt, .dCont .add-qty, .dCont .pdt-hstry, .dCont .del-pdt,
 .order-buttons-wrapper .show-details, .order-buttons-wrapper .edit-order, .order-buttons-wrapper .deliver-memo,
-.order-buttons-wrapper .create-delivery-memo{
+.order-buttons-wrapper .create-delivery-memo, .make-payment-wrapper .make-payment{
     font-size: 14px;
     color: #fff;
     margin: 0;
@@ -266,7 +273,7 @@ table .thead-dark th{
 }
 .dCont .edit-pdt, .dCont .add-qty, .dCont .pdt-hstry,
 .order-buttons-wrapper .show-details, .order-buttons-wrapper .edit-order, .order-buttons-wrapper .deliver-memo,
-.order-buttons-wrapper .create-delivery-memo{
+.order-buttons-wrapper .create-delivery-memo, .make-payment-wrapper .make-payment{
     background: #0059ad;
 }
 
@@ -343,6 +350,17 @@ table .thead-dark th{
     width: 100%;
 }
 
+.remark-wrapper{
+    padding: 0;
+}
+.remark-wrapper .remark-label{
+    width: auto;
+    vertical-align: top;
+}
+.remark-wrapper .remark-textarea{
+    width: 80%;
+}
+
 /*Billing page ends here*/
 
 /*Order details pade starts here*/
@@ -352,14 +370,21 @@ table .thead-dark th{
 }
 
 .order-datails-wrapper .order-details{
-    font-size: 18px;
+    font-size: 12px;
     margin-bottom: 10px;
 }
-.order-history-wrapper .delete-order{
+.order-icons-wrapper, .product-icons-wrapper{
     position: absolute;
     top: 30%;
     right: 20px;  
     z-index: 100;
+}
+
+.order-icons-wrapper .order-icons, .product-icons-wrapper .product-icons{
+    padding: 5px;
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
 }
 
 .order-history-wrapper .product-search{
@@ -508,11 +533,18 @@ footer{
         color:#ffffff;
     }
     
-    .billing-box .order-no{
+    .order-datails-wrapper .order-details, .billing-box .order-no{
         font-size: 20px;
     }
-    .order-datails-wrapper .order-details{
-        font-size: 20px;        
+
+    .order-heading{
+        font-size: 20px;
+        margin-bottom: 10px;
+    }
+
+    .order-desc{
+        font-size: 18px;
+        margin-bottom: 10px;
     }
 
     label{

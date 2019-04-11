@@ -102,24 +102,11 @@ serMod.service('fetchData',function($http,$q){
         return q.promise;
     }
 
-    this.prodCount = function (cat) {
-      var q = $q.defer();
-      $http({
-        url: '/api/getProdCount',
-        method: "GET",
-        params: {cat: cat}
-     }).then(function (response) {
-        q.resolve(response.data);
-      },function(error){
-        q.reject(error);
-      })
-        return q.promise;
-    }
-
 });
 
 serMod.service('retailService', function($http,$localStorage, $q){
   var _self = this;
+  var billDetails;
 
 
   this.getProductsCategory = function() {
@@ -153,8 +140,7 @@ serMod.service('retailService', function($http,$localStorage, $q){
     var q = $q.defer();
     $http({
     method: 'GET',
-    url: '/api/findOrderById',
-    params: { orderId: id }
+    url: '/api/getCustData/'+id
     }).then(function successCallback(response) {
       q.resolve(response.data)
     }, function errorCallback(error) {
@@ -165,14 +151,14 @@ serMod.service('retailService', function($http,$localStorage, $q){
 
 	this.addProduct = function(obj){
     $http.post('/api/addProduct',obj);
-	}
+  }
+  
+  this.setOrder = function(order){
+    billDetails = order;
+  }
 
-  this.updateOrderStatus = function (selectedOrderObj, callback) {
-    $http.post('/api/updateOrderStatus', selectedOrderObj).then(function successCallback(response) {
-      callback(response.config.data.status);
-    }, function errorCallback(error) {
-      console.log('update status error occured');
-    });
+  this.getOrder = function(){
+    return billDetails;
   }
 
   this.getProdNames = function(selectedCat){
@@ -224,6 +210,10 @@ serMod.service('retailService', function($http,$localStorage, $q){
     $http.post('/api/saveOrder', orderObj);
   }
 
+  this.sendEmail = function(recvId){
+    $http.post('/api/sendMail', recvId);
+  }
+
   this.deleteItem = function (orderId) {
     $http.post('/api/deleteItem',{id: orderId}).then(function(data) {
       console.log(data);
@@ -237,15 +227,47 @@ serMod.service('retailService', function($http,$localStorage, $q){
   
 
   this.createDeliveryMemo = function (deliveryObj) {
-    $http.post('/api/createDeliveryMemo', deliveryObj)
+    var q = $q.defer(); 
+    $http.post('/api/createDeliveryMemo', deliveryObj).then(function successCallback(response){
+      q.resolve(response);
+    }, function errorCallback(err){
+      q.reject(err);
+    })
+
+    return q.promise;
   }
 
-  this.getDeliveryData =function (selectedOrder){
+  this.addPayment = function(id, paymentObj){
+    var q = $q.defer();
+    $http.post('/api/addPayment', {id: id, paymentObj: paymentObj}).then(function successCallback(response){
+      q.resolve(response);
+    }, function errorCallback(err){
+      q.reject(err);
+    })
+
+    return q.promise;
+  }
+
+  this.getDeliveryData = function (){
+    var q= $q.defer();
+    $http({
+      method: 'GET',
+      url: '/api/deliveryData/'
+      }).then(function successCallback(response) {
+        q.resolve(response);
+  
+      }, function errorCallback(err) {
+        q.reject(err)
+      });
+      return q.promise;
+
+  }
+
+  this.getDeliveryDataByOrder =function (selectedOrder){
     var q = $q.defer();
     $http({
     method: 'GET',
-    url: '/api/getDeliveryData',
-    params: {orderId: selectedOrder}
+    url: '/api/deliveryData/'+ selectedOrder
     }).then(function successCallback(response) {
       q.resolve(response);
 
@@ -305,3 +327,13 @@ serMod.service('retailService', function($http,$localStorage, $q){
   };
   
 });
+
+
+
+ // this.updateOrderStatus = function (selectedOrderObj, callback) {
+  //   $http.put('/api/updateOrderStatus', selectedOrderObj).then(function successCallback(response) {
+  //     callback(response.config.data.status);
+  //   }, function errorCallback(error) {
+  //     console.log('update status error occured');
+  //   });
+  // }

@@ -1,6 +1,9 @@
 <div class="order-wrapper" id="downloadOrder" style='display: none;'>
     <div class="order-header">
-      Header
+      <h1>Flipkart retail service pvt ltd</h1>
+      <p>Mysore road, Bangalore, 560048</p>
+      <p>Phone no: 08022445588</p>
+      <h2>Cash Memo</h2>
     </div>
     <div class="order-content">
         <div class="row order-wrapper">
@@ -9,7 +12,7 @@
             <p class="pull-left col-xs-12 col-sm-6 order-details"> Address: {{data.address}}</p>
             <p class="pull-left col-xs-12 col-sm-6 order-details"> Email id: {{data.email}}</p>
             <p class="pull-left col-xs-12 col-sm-6 order-details"> Contact: {{data.contact}}</p>
-            <p class="pull-left col-xs-12 col-sm-6 order-details"> Date: {{data.billDate}}</p>
+            <p class="pull-left col-xs-12 col-sm-6 order-details"> Date: {{data.billDate | formatDate}}</p>
         </div>
   
           <div class="clearfix">
